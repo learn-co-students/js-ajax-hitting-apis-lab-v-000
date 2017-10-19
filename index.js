@@ -1,5 +1,5 @@
-function getRepositories() {
-  let username = event.target.username.value
+function getRepositories() { 
+  let username = document.getElementById('username').value
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayRepositories);
   req.open("GET", `https://api.github.com/users/${username}/repos`)
@@ -7,7 +7,7 @@ function getRepositories() {
 }
 
 function displayRepositories() {
-  let repos = JSON.parse(event.srcElement.responseText)
+  let repos = JSON.parse(this.responseText)
   let reposHTML = '<ul>'
   for(let i = 0; i < repos.length; i++){
     let repo = repos[i]
@@ -15,12 +15,12 @@ function displayRepositories() {
     reposHTML += repoLink
   }
   reposHTML += '</ul>'
-  $('#repositories')[0].innerHTML = reposHTML
+  document.getElementById('repositories').innerHTML = reposHTML
 }
 
-function getCommits() {
-  const repo = event.target.dataset.repository
-  const username = event.target.dataset.username
+function getCommits(obj) {
+  const repo = obj.dataset.repository
+  const username = obj.dataset.username
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayCommits)
   req.open("GET", `https://api.github.com/repos/${username}/${repo}/commits`)
@@ -40,9 +40,9 @@ function displayCommits() {
   document.getElementById('details').innerHTML = commitsHTML
 }
 
-function getBranches(){
-  const repository = event.target.dataset.repository
-  const username = event.target.dataset.username
+function getBranches(obj){
+  const repository = obj.dataset.repository
+  const username = obj.dataset.username
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayBranches)
   req.open("GET", `https://api.github.com/repos/${username}/${repository}/branches`)
@@ -50,7 +50,7 @@ function getBranches(){
 }
 
 function displayBranches(){
-  let branches = JSON.parse(event.target.response)
+  let branches = JSON.parse(this.responseText)
   let branchesHTML = '<ul>'
   for(let i = 0; i < branches.length; i++){
     if (branches[i]){
@@ -61,8 +61,4 @@ function displayBranches(){
   }
   branches += '</ul>'
   document.getElementById('details').innerHTML = branchesHTML
-}
-
-function branchesData(){
-  console.log("you talkin to me??")
 }
