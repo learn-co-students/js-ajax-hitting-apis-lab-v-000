@@ -4,16 +4,14 @@ function getRepositories() {
   req.addEventListener("load", displayRepositories);
   req.open("GET", `https://api.github.com/users/${username}/repos`)
   req.send();
-  console.log('sent');
 }
 
 function displayRepositories(event, data) {
-  console.log('start show');
   const repos = JSON.parse(this.responseText);
   let repoHTML = '<ul>';
   repoHTML += repos.map(r => `<li>${r.name}</br><a href="${r.html_url}">Go to Repo</a></br><a href="#" data-repository="${r.name}" data-username="${r.owner.login}" onclick="getCommits(this)">Get Commits</a></br><a href="#" data-repository="${r.name}" data-username="${r.owner.login}" onclick="getBranches(this)">Get Branches</a></li>`).join('');
   repoHTML += '</ul>';
-  document.getElementById('repositories').innerHTML += repoHTML;
+  document.getElementById('repositories').innerHTML = repoHTML;
 }
 
 function getCommits(el) {
@@ -26,7 +24,6 @@ function getCommits(el) {
 }
 
 function displayCommits(event, data) {
-  console.log("display");
   const commits = JSON.parse(this.responseText);
   let commitHTML = "<ul>";
   commitHTML += commits.map(c => `<li>${c.author.login} - ${c.commit.author.name} - ${c.commit.message}</li>`).join("");
