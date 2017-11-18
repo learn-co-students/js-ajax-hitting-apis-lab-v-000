@@ -30,14 +30,18 @@ function getRepositories(){
 function displayCommits(){
   var commits = JSON.parse(this.responseText)
   
-  const commitList = 
+  const commitList = `<ul>${commits.map(commit => '<li><h3>' + commit.commit.author.name + ' (' + commit.author.login + ')</h3>' + commit.commit.message + '</li>').join('')}</ul>`
 
   document.getElementById("details").innerHTML = commitList
   
 }
 
 function displayBranches(){
-
+  var branches = JSON.parse(this.responseText)
+  const branchesList = `<ul>${branches.map(branch => '<li>' + branch.name + '</li>').join('')}</ul>`
+  
+  document.getElementById("details").innerHTML = branchesList
+  
 }
 function getBranches(el){
   
