@@ -2,7 +2,7 @@
 function getRepositories(){
   
     const req = new XMLHttpRequest()
-    req.addEventListener("Load", displayRepositories)
+    req.addEventListener("load", displayRepositories)
     
     var name = document.getElementById("username").value
     // debugger
@@ -10,29 +10,54 @@ function getRepositories(){
     req.send()
     
   }
-function displayCommits(){
+  function displayRepositories(){
+    var repos = JSON.parse(this.responseText)
+    const repoList = "<ul>" + repos.map(repo => {
+      const dataUsername = 'data-username="' + repo.owner.login + '"'
+      const dataRepoName = 'data-repository="' + repo.name + '"'
+      return(`
+            <li>
+              <h2>${repo.name}</h2>
+              <a href="${repo.html_url}">${repo.html_url}</a><br>
+              <a href="#" ${dataRepoName} ${dataUsername} onclick="getCommits(this)">Get Commits</a><br>
+              <a href="#" ${dataRepoName} ${dataUsername} onclick="getBranches(this)">Get Branches</a></li>
+            </li>`
+            )
+    }).join('') + "</ul>";
+    document.getElementById("repositories").innerHTML = repoList
 
+  }
+function displayCommits(){
+  var commits = JSON.parse(this.responseText)
+  
+  const commitList = 
+
+  document.getElementById("details").innerHTML = commitList
+  
 }
 
 function displayBranches(){
 
 }
-function getBranches(){
+function getBranches(el){
   
+  const repo = el.dataset.repository
+  const owner = el.dataset.username
+  const req = new XMLHttpRequest()
+  req.addEventListener("load", displayBranches)  
+
+  req.open("GET", 'https://api.github.com/repos/' + owner + '/' + repo + '/branches')
+  req.send()
 }
 function getCommits(el){
-  const name = el.dataset.repo
+  
+  const username = el.dataset.username
+  const repo = el.dataset.repository
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayCommits)
-
-  // req.open("GET", 'https://api.github.com/repos/:owner/:repo/commits')
-
+  req.open("GET", 'https://api.github.com/repos/' + username + '/' + repo + '/commits')
+  req.send()
 }
 
-function displayRepositories(event, data){
-  
-  var repos = JSON.parse(this.responsetext)
-  console.log(repos)
-  document.getElementById("username").innerHTML = repolist
-}
+
 
