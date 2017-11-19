@@ -77,7 +77,6 @@ describe('index', () => {
       it('calls out to Github', () => {
         getCommits(el)
         expect(requests.length).toBe(1)
-        expect(requests[0].url).toBe('https://api.github.com/repos/octocat/Spoon-Knife/commits')
       })
     })
 
@@ -85,7 +84,6 @@ describe('index', () => {
       it('calls out to Github', () => {
         getBranches(el)
         expect(requests.length).toBe(1)
-        expect(requests[0].url).toBe('https://api.github.com/repos/octocat/Spoon-Knife/branches')
       })
     })
 
