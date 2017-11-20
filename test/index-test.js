@@ -10,7 +10,7 @@ describe('index', () => {
 
   describe('callback functions', () => {
     describe('displayCommits', () => {
-      it('parses and displays json values', () => {
+      it('parses and displays json values', () => {       
         var resp = { responseText: commitsData() }
         displayCommits.call(resp)
         el = document.getElementById("details")
