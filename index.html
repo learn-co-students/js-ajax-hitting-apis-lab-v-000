@@ -9,12 +9,10 @@
          display: -webkit-flex;
          display: flex;
        }
-
       .flexbox-container > div {
         width: 50%;
         padding: 10px;
       }
-
       .flexbox-container > div:first-child {
         margin-right: 20px;
       }
@@ -23,10 +21,14 @@
     <body>
     <main id="main">
     </main>
+    <form onsubmit="getRepositories();return false;">
+      <input id="username" type="text" placeholder="Enter a username">
+    </form> 
     <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
         <div id="repositories"></div>
+        <!-- <a href="#" onclick="getRepositories()">Get Repositories</a> -->
       </div>
       <div>
         <h3>Details</h3>
