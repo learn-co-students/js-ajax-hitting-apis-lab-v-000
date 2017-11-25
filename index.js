@@ -36,3 +36,22 @@ function getCommits(el){
   req.open("GET", `https://api.github.com/repos/${ownerName}/${repoName}/commits`)
   req.send()
 }
+
+function getBranches(el){
+  // console.log(el)
+  const repoName = el.dataset.repository
+  const ownerName = el.dataset.username
+  const req = new XMLHttpRequest()
+  req.addEventListener("load", displayBranches)
+  req.open("GET", `https://api.github.com/repos/${ownerName}/${repoName}/branches`)
+  req.send()
+}
+
+function displayBranches(){
+  let branches = JSON.parse(this.responseText)
+  console.log(branches)
+  debugger
+  let branchesList = `<ul>${branches.map(b => '<li>' + b.name + '</li>').join('')} </ul>`
+
+  document.getElementById('details').innerHTML = branchesList
+}
