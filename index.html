@@ -19,6 +19,8 @@
         margin-right: 20px;
       }
     </style>
+
+    
     </head>
     <body>
     <main id="main">
@@ -26,15 +28,15 @@
     <div class="flexbox-container">
       <div>
         <form onsubmit="getRepositories();return false;">
+          <br> GitHub Username:
           <br>
-          GitHub Username:
-          <br>
-          <input id="git-user" type="text">
+          <input id="username" type="text">
           <br>
           <input type="submit" value="Submit">
         </form>
       </div>
-      <br>
+    </div>
+    <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
         <div id="repositories"></div>
