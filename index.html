@@ -19,16 +19,30 @@
         margin-right: 20px;
       }
     </style>
+
+    
     </head>
     <body>
     <main id="main">
     </main>
     <div class="flexbox-container">
       <div>
+        <form onsubmit="getRepositories();return false;">
+          <br> GitHub Username:
+          <br>
+          <input id="username" type="text">
+          <br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+    <div class="flexbox-container">
+      <div>
         <h3>Repositories</h3>
         <div id="repositories"></div>
       </div>
       <div>
+
         <h3>Details</h3>
         <div id="details"></div>
       </div>
