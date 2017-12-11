@@ -2,6 +2,7 @@ describe('index', () => {
   describe('page', () => {
     it('has a form', () => {
       var form = document.getElementsByTagName("form")[0]
+      // debugger
       expect(form).toExist()
       expect(form).toMatch(/getRepositories()/)
       expect(document.getElementById("username")).toExist()
