@@ -14,9 +14,9 @@ describe('index', () => {
         var resp = { responseText: commitsData() }
         displayCommits.call(resp)
         el = document.getElementById("details")
-        expect(el.innerHTML).toMatch(/Monalisa Octocat/)
-        expect(el.innerHTML).toMatch(/octocat/)
-        expect(el.innerHTML).toMatch(/Fix all the bugs/)
+        expect(el.innerHTML).toMatch(/Monalisa Octocat/) //commit author's full name
+        expect(el.innerHTML).toMatch(/octocat/) //commit author's github name
+        expect(el.innerHTML).toMatch(/Fix all the bugs/) //commit message
       })
     })
 
