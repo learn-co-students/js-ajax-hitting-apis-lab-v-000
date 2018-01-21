@@ -14,7 +14,7 @@
         width: 50%;
         padding: 10px;
       }
-
+      
       .flexbox-container > div:first-child {
         margin-right: 20px;
       }
@@ -26,6 +26,11 @@
     <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
+        <form onsubmit="getRepositories(); return false">
+          <label for="username">Username</label>
+          <input id="username" type="text" name="username">
+          <input type="submit" value="Get Repos">
+        </form>
         <div id="repositories"></div>
       </div>
       <div>
