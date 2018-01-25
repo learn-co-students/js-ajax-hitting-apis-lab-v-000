@@ -76,6 +76,7 @@ describe('index', () => {
     describe('getCommits', () => {
       it('calls out to Github', () => {
         getCommits(el)
+        //console.log(requests)
         expect(requests.length).toBe(1)
         expect(requests[0].url).toBe('https://api.github.com/repos/octocat/Spoon-Knife/commits')
       })

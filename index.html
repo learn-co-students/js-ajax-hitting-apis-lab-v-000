@@ -23,6 +23,11 @@
     <body>
     <main id="main">
     </main>
+    <form onsubmit="getRepositories();">
+      Username: <input type="text" id="username" />
+      <input type="submit" />
+    </form>
+    <!-- <a href="#" onclick="getRepositories();">click for repos</a> -->
     <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
@@ -33,6 +38,28 @@
         <div id="details"></div>
       </div>
     </div>
+
+    <!-- add in lodash templates for displaying repos -->
+    <script id="repository-template" type="text/x-lodash-template">
+      <li>
+        <strong><a href="<%- html_url %>"><%- name %></a></strong> |
+        <a href="#" data-repository="<%- name %>" data-username="<%- username %>" onclick="getCommits(this);">Get Commits</a> |
+        <a href="#" data-repository="<%- name %>" data-username="<%- username %>" onclick="getBranches(this);">Get Branches</a>
+      </li>
+    </script>
+
+    <script id="commit-template" type="text/x-lodash-template">
+      <li>
+        <strong><%= author_name %> (<%= username %>)</strong> - <%= message %>
+      </li>
+    </script>
+
+    <script id="branch-template" type="text/x-lodash-template">
+      <li>
+        <%= name %>
+      </li>
+    </script>
+
     <script src="index.js"></script>
     <!-- Open this file and call `mocha.run()` in console to run tests -->
     <div id="mocha"></div>
@@ -40,6 +67,7 @@
     <script src="node_modules/expect/umd/expect.min.js"></script>
     <script src="node_modules/sinon/pkg/sinon.js"></script>
     <script>mocha.setup('bdd');</script>
+    <script src="node_modules/lodash/lodash.min.js"></script>
     <script src="test/index-test.js"></script>
   </body>
 </html>
