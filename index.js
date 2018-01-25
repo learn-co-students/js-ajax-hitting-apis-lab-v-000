@@ -1,29 +1,31 @@
 function displayRepositories(event, data) {
   var repos = JSON.parse(this.responseText)
-  const repoTemplate = _.template(document.getElementById("repository-template").innerHTML);
-  document.getElementById("repositories").innerHTML = '<ul id="repositories-list"></ul>';
-  var repoList = document.getElementById("repositories-list").innerHTML;
-  repos.map(r => repoList += repoTemplate({'html_url': r.html_url, 'name': r.name, 'username': r.owner.login}));
+  // const repoTemplate = _.template(document.getElementById("repository-template").innerHTML);
+  // document.getElementById("repositories").innerHTML = '<ul id="repositories-list"></ul>';
+  // var repoList = document.getElementById("repositories-list").innerHTML;
+  // repos.map(r => repoList += repoTemplate({'html_url': r.html_url, 'name': r.name, 'username': r.owner.login}));
+  var repoList = `<ul>${repos.map(r => '<li><strong><a href="' + r.html_url + '">' + r.name + '</a></strong> | <a href="#" data-repository="' + r.name + '" data-username="' + r.owner.login + '" onclick="getCommits(this);">Get Commits</a> | <a href="#" data-repository="' + r.name + '" data-username="' + r.owner.login + '" onclick="getBranches(this);">Get Branches</a></li>').join('')}</ul>`;
   document.getElementById("repositories").innerHTML = repoList;
 }
 
 function displayCommits() {
   const commits = JSON.parse(this.responseText);
-  const commitTemplate = _.template(document.getElementById("commit-template").innerHTML);
-  document.getElementById("details").innerHTML = '<ul id="commits-list"></ul>';
-  var commitsList = document.getElementById("commits-list").innerHTML;
-  commits.map(c => commitsList += commitTemplate({'author_name': c.commit.author.name, 'username': c.author.login, 'message': c.commit.message}));
+  // const commitTemplate = _.template(document.getElementById("commit-template").innerHTML);
+  // document.getElementById("details").innerHTML = '<ul id="commits-list"></ul>';
+  // var commitsList = document.getElementById("commits-list").innerHTML;
+  // commits.map(c => commitsList += commitTemplate({'author_name': c.commit.author.name, 'username': c.author.login, 'message': c.commit.message}));
+  var commitsList = `<ul>${commits.map(c => '<li><strong>' + c.commit.author.name + ' (' + c.author.login + ')</strong> - ' + c.commit.message + '</li>').join('')}</ul>`
   document.getElementById("details").innerHTML = commitsList;
 }
 
 function displayBranches() {
   const branches = JSON.parse(this.responseText);
-  const branchTemplate = _.template(document.getElementById("branch-template").innerHTML);
-  document.getElementById("details").innerHTML = '<ul id="branches-list"></ul>';
-  var branchesList = document.getElementById("branches-list").innerHTML;
-  branches.map(b => branchesList += branchTemplate({'name': b.name}))
+  // const branchTemplate = _.template(document.getElementById("branch-template").innerHTML);
+  // document.getElementById("details").innerHTML = '<ul id="branches-list"></ul>';
+  // var branchesList = document.getElementById("branches-list").innerHTML;
+  // branches.map(b => branchesList += branchTemplate({'name': b.name}))
   //console.log(branches);
-  //var branchesInfo = `<ul>${branches.map(b => '<li>' + b.name + '</li>').join('')}</ul>`;
+  var branchesList = `<ul>${branches.map(b => '<li>' + b.name + '</li>').join('')}</ul>`;
   document.getElementById("details").innerHTML = branchesList;
 }
 
