@@ -25,6 +25,14 @@
     </main>
     <div class="flexbox-container">
       <div>
+        <form onsubmit="getRepositories(); return false;">
+          Username: <input id="username" type="text"><br>
+          <input type="submit" value="Retrieve">
+        </form>
+      </div>
+    </div>
+    <div class="flexbox-container">
+      <div>
         <h3>Repositories</h3>
         <div id="repositories"></div>
       </div>
@@ -34,6 +42,23 @@
       </div>
     </div>
     <script src="index.js"></script>
+
+    <!-- <script id="repo-template" type="text/x-handlebars-template">
+      <ul>
+        {{#each this}}
+        <li>
+          {{log this}}
+          <a href="{{arrOfRepos[i].html_url}}">See at GitHub</a>
+           - - {{name}} - -
+          <a href="#" data-repo="{{name}}" onclick="getCommits(this)">Get Commits</a>
+           - -
+           <a href="#" data-repo="{{name}}" data-username="{{}}" onclick="getBranches(this)">Get Branches</a>
+        </li>
+        {{/each}}
+      </ul>
+    </script> -->
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.amd.js"></script> -->
     <!-- Open this file and call `mocha.run()` in console to run tests -->
     <div id="mocha"></div>
     <script src="node_modules/mocha/mocha.js"></script>
