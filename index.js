@@ -10,6 +10,7 @@ function showRepositories(event, data) {
              <h2>${repo.name}</h2>
              <a href="${repo.html_url}">${repo.html_url}</a><br>
              <a href="#" ${dataRepoName} ${dataUsername} onclick="getCommits(this)">Get Commits</a><br>
+             <a href="#" ${dataRepoName} ${dataUsername} onclick="getBranches(this)">Get Branches</a><br>
              </li>`)
    }).join('') + "</ul>";
    document.getElementById("repositories").innerHTML = repoList
@@ -31,6 +32,17 @@ function displayCommits() {
     document.getElementById("details").innerHTML = commitList
 }
 
+function displayBranches() {
+  var branches = JSON.parse(this.responseText)
+  console.log(branches)
+  const branchList = "<ul>" + branches.map(branch => {
+    const dataBranchname = '"' + branch.name + '"'
+    return(`<li>
+      Branch Name: ${dataBranchname}<br>
+      </li`)}).join('') + "</ul>"
+  document.getElementById("details").innerHTML = branchList
+}
+
 function getRepositories() {
   const req = new XMLHttpRequest()
   req.addEventListener("load", showRepositories)
@@ -45,6 +57,15 @@ function getCommits(c) {
   ///repos/:owner/:repo/commits
   req.addEventListener("load", displayCommits)
   var uri = giturl + "repos/" + c.dataset.username + "/" + c.dataset.repository + "/commits"
+  req.open("Get", uri)
+  req.send()
+}
+
+function getBranches(b) {
+  const req = new XMLHttpRequest()
+  ///repos/:owner/:repo/branches
+  req.addEventListener("load", displayBranches)
+  var uri = giturl + "repos/" + b.dataset.username + "/" + b.dataset.repository + "/branches"
   req.open("Get", uri)
   req.send()
 }
