@@ -1,6 +1,6 @@
 const giturl = "https://api.github.com/"
 
-function showRepositories(event, data) {
+function displayRepositories(event, data) {
   var repos = JSON.parse(this.responseText)
   console.log(repos)
   const repoList = "<ul>" + repos.map(repo => {
@@ -13,7 +13,7 @@ function showRepositories(event, data) {
              <a href="#" ${dataRepoName} ${dataUsername} onclick="getBranches(this)">Get Branches</a><br>
              </li>`)
    }).join('') + "</ul>";
-   document.getElementById("repositories").innerHTML = repoList
+   document.getElementById("repositories").innerHTML += repoList
 }
 
 function displayCommits() {
@@ -45,7 +45,7 @@ function displayBranches() {
 
 function getRepositories() {
   const req = new XMLHttpRequest()
-  req.addEventListener("load", showRepositories)
+  req.addEventListener("load", displayRepositories)
   var user = document.getElementById("username").value
   var uri = giturl + "users/" + user + "/repos"
   req.open("GET", uri)
