@@ -22,8 +22,16 @@
     </head>
     <body>
     <main id="main">
+      <h1>GIT Browser</h1>
+      <div>
+        <form onsubmit="getRepositories();return false">
+          <input type="text" name="user_name" id="username">
+          <input type="submit" value="Get Repos">
+        </form>
+      </div>
     </main>
     <div class="flexbox-container">
+
       <div>
         <h3>Repositories</h3>
         <div id="repositories"></div>
