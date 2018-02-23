@@ -9,7 +9,7 @@ function getRepositories() {
 function displayRepositories(event, data) {
   var repos = JSON.parse(this.responseText)
   console.log(repos)
-  const repoList = `<ul>${repos.map(r => '<li>' + r.name + ' - <a href="https://github.com/octocat/'+r.name+'">Get Repo</a></li>').join('')}</ul>`
+  const repoList = `<ul>${repos.map(r => '<li>' + r.name + ' - <a href="https://github.com/octocat/'+r.name+'" target="_blank">Get Repo</a></li>').join('')}</ul>`
   document.getElementById("repositories").innerHTML = repoList
 }
 
