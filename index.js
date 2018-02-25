@@ -2,7 +2,7 @@ function displayRepositories() {
     var repos = JSON.parse(this.responseText)
     console.log(repos)
     // console.log(this)
-    const repoList = `<ul>${repos.map(r => '<li>' + r.name + ' -' + r.html_url + ' - <a href="#" data-repo="' + r.name + '" data-username="' + r.owner.login + '" onclick="getBranches(this)">Get Branches</a>'    + ' - <a href="#" data-repo="' + r.name + '" data-username="' + r.owner.login + '" onclick="getCommits(this)">Get Commits</a></li>').join('')}</ul>`
+    const repoList = `<ul>${repos.map(r => '<li>' + r.name + ' -' + r.html_url + ' - <a href="#" data-repository="' + r.name + '" data-username="' + r.owner.login + '" onclick="getBranches(this)">Get Branches</a>'    + ' - <a href="#" data-repository="' + r.name + '" data-username="' + r.owner.login + '" onclick="getCommits(this)">Get Commits</a></li>').join('')}</ul>`
 
     document.getElementById("repositories").innerHTML = repoList
 }
@@ -17,7 +17,7 @@ function getRepositories() {
 }
 
 function getCommits(el) {
-  const repository = el.dataset.repo
+  const repository = el.dataset.repository
   const username = el.dataset.username
   console.log(repository)
   const req = new XMLHttpRequest()
@@ -34,7 +34,7 @@ function displayCommits() {
 }
 
 function getBranches(el) {
-  const repository = el.dataset.repo
+  const repository = el.dataset.repository
   const username = el.dataset.username
   console.log(repository)
   const req = new XMLHttpRequest()
