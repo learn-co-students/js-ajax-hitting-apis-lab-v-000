@@ -41,6 +41,8 @@
         <div id="details">
           <div id="branches">
           </div>
+          <div id="commits">
+          </div>
         </div>
       </div>
     </div>
@@ -61,6 +63,13 @@
       <ul>
         {{#each branches}}
           <li>{{name}}</li>
+        {{/each}}
+      </ul>
+    </script>
+    <script id="commits-template" type="text/x-handlebars-template">
+      <ul>
+        {{#each commits}}
+          <li><a href="{{html_url}}">{{commit.message}}</a></li>
         {{/each}}
       </ul>
     </script>

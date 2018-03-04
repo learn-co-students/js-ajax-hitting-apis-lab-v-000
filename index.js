@@ -13,6 +13,13 @@ function getBranches(branchUrl) {
   req.send()
 }
 
+function getCommits(commitUrl) {
+  const req = new XMLHttpRequest()
+  req.open("GET", stripOptionalUrl(commitUrl))
+  req.addEventListener("load", displayCommits)
+  req.send()
+}
+
 function stripOptionalUrl(url) {
   return url.replace(/\{.+\}/, "")
 }
@@ -29,8 +36,21 @@ function displayBranches() {
   branchesElement.innerHTML = branchesHtml
 }
 
+function displayCommits() {
+  var source = document.getElementById("commits-template").innerHTML;
+  var template = Handlebars.compile(source);
+  let commits = JSON.parse(this.responseText)
+
+  let commitsHtml = template({
+    commits
+  })
+  const commitsElement = document.querySelector("#commits")
+  commitsElement.innerHTML = commitsHtml
+}
+
 function getDetails(repoElement) {
   getBranches(repoElement.dataset.branchesUrl)
+  getCommits(repoElement.dataset.commitsUrl)
 }
 
 function displayRepositories(event) {
