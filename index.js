@@ -18,7 +18,15 @@ function stripOptionalUrl(url) {
 }
 
 function displayBranches() {
-  debugger
+  var source = document.getElementById("branches-template").innerHTML;
+  var template = Handlebars.compile(source);
+  let branches = JSON.parse(this.responseText)
+
+  let branchesHtml = template({
+    branches
+  })
+  const branchesElement = document.querySelector("#branches")
+  branchesElement.innerHTML = branchesHtml
 }
 
 function getDetails(repoElement) {
