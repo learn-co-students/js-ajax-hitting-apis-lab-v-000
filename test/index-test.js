@@ -11,7 +11,9 @@ describe('index', () => {
   describe('callback functions', () => {
     describe('displayCommits', () => {
       it('parses and displays json values', () => {
-        var resp = { responseText: commitsData() }
+        var resp = {
+          responseText: commitsData()
+        }
         displayCommits.call(resp)
         el = document.getElementById("details")
         expect(el.innerHTML).toMatch(/Monalisa Octocat/)
@@ -22,7 +24,9 @@ describe('index', () => {
 
     describe('displayBranches', () => {
       it('parses and displays json values', () => {
-        var resp = { responseText: branchesData() }
+        var resp = {
+          responseText: branchesData()
+        }
         displayBranches.call(resp)
         el = document.getElementById("details")
         expect(el.innerHTML).toMatch(/master/)
@@ -30,7 +34,9 @@ describe('index', () => {
     })
     describe('displayRepositories', () => {
       it('parses and displays json values', () => {
-        var resp = { responseText: reposData() }
+        var resp = {
+          responseText: reposData()
+        }
         displayRepositories.call(resp)
         el = document.getElementById("repositories")
         expect(el.innerHTML).toMatch(/Hello-World/)
@@ -46,11 +52,16 @@ describe('index', () => {
     let el
 
     before(() => {
-      el = { dataset: { repository: 'Spoon-Knife', username: 'octocat' } }
+      el = {
+        dataset: {
+          repository: 'Spoon-Knife',
+          username: 'octocat'
+        }
+      }
       xhr = sinon.useFakeXMLHttpRequest()
       window.XMLHttpRequest = xhr
 
-      xhr.onCreate = function(req) {
+      xhr.onCreate = function (req) {
         requests.push(req)
       }
     })
@@ -64,7 +75,7 @@ describe('index', () => {
       xhr.restore()
     })
 
-    describe('getRepositories', () => {
+    describe.only('getRepositories', () => {
       it('calls out to Github', () => {
         document.getElementById("username").value = 'octocat'
         getRepositories()
@@ -93,8 +104,7 @@ describe('index', () => {
 })
 
 function commitsData() {
-  const commits = [
-  {
+  const commits = [{
     "url": "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
     "sha": "6dcb09b5b57875f334f61aebed695e2e4193db5e",
     "html_url": "https://github.com/octocat/Hello-World/commit/6dcb09b5b57875f334f61aebed695e2e4193db5e",
@@ -162,19 +172,16 @@ function commitsData() {
       "type": "User",
       "site_admin": false
     },
-    "parents": [
-      {
-        "url": "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
-        "sha": "6dcb09b5b57875f334f61aebed695e2e4193db5e"
-        }
-      ]
-    }
-  ]
-  return(JSON.stringify(commits))
+    "parents": [{
+      "url": "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
+      "sha": "6dcb09b5b57875f334f61aebed695e2e4193db5e"
+    }]
+  }]
+  return (JSON.stringify(commits))
 }
+
 function branchesData() {
-  const branches = [
-  {
+  const branches = [{
     "name": "master",
     "commit": {
       "sha": "6dcb09b5b57875f334f61aebed695e2e4193db5e",
@@ -182,13 +189,12 @@ function branchesData() {
     },
     "protected": true,
     "protection_url": "https://api.github.com/repos/octocat/Hello-World/branches/master/protection"
-  }
-  ]
-  return(JSON.stringify(branches))
+  }]
+  return (JSON.stringify(branches))
 }
+
 function reposData() {
-  const repos = [
-  {
+  const repos = [{
     "id": 1296269,
     "owner": {
       "login": "octocat",
@@ -277,7 +283,6 @@ function reposData() {
       "push": false,
       "pull": true
     }
-  }
-  ]
-  return(JSON.stringify(repos))
+  }]
+  return (JSON.stringify(repos))
 }

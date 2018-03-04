@@ -21,8 +21,16 @@
     </style>
     </head>
     <body>
+      <p>
+        <form action="#" onsubmit="getRepositories(); return false;">
+          <label for="username">Query Username:</label>
+          <input type="text" name="username" id="username">
+          <input type="submit" value="Search">
+        </form>
+      </p>
     <main id="main">
     </main>
+
     <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
@@ -30,9 +38,41 @@
       </div>
       <div>
         <h3>Details</h3>
-        <div id="details"></div>
+        <div id="details">
+          <div id="branches">
+          </div>
+          <div id="commits">
+          </div>
+        </div>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
+    <script id="repos-template" type="text/x-handlebars-template">
+      <ul>
+        {{#each repos}}
+          <li><a href="#"
+              data-html-url="{{html_url}}"
+              data-branches-url="{{branches_url}}"
+              data-commits-url="{{commits_url}}"
+              class="repo"
+            >{{name}}</a></li>
+        {{/each}}
+      </ul>
+    </script>
+    <script id="branches-template" type="text/x-handlebars-template">
+      <ul>
+        {{#each branches}}
+          <li>{{name}}</li>
+        {{/each}}
+      </ul>
+    </script>
+    <script id="commits-template" type="text/x-handlebars-template">
+      <ul>
+        {{#each commits}}
+          <li><a href="{{html_url}}">{{commit.message}}</a></li>
+        {{/each}}
+      </ul>
+    </script>
     <script src="index.js"></script>
     <!-- Open this file and call `mocha.run()` in console to run tests -->
     <div id="mocha"></div>
