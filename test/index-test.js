@@ -46,7 +46,7 @@ describe('index', () => {
     })
   })
 
-  describe.only('xhr functions', () => {
+  describe('xhr functions', () => {
     let xhr
     let requests
     let el
@@ -75,7 +75,7 @@ describe('index', () => {
       xhr.restore()
     })
 
-    describe('getRepositories', () => {
+    describe.only('getRepositories', () => {
       it('calls out to Github', () => {
         document.getElementById("username").value = 'octocat'
         getRepositories()
