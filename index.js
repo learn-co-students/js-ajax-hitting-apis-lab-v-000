@@ -6,6 +6,25 @@ function getRepositories() {
   req.send()
 }
 
+function getBranches(branchUrl) {
+  const req = new XMLHttpRequest()
+  req.open("GET", stripOptionalUrl(branchUrl))
+  req.addEventListener("load", displayBranches)
+  req.send()
+}
+
+function stripOptionalUrl(url) {
+  return url.replace(/\{.+\}/, "")
+}
+
+function displayBranches() {
+  debugger
+}
+
+function getDetails(repoElement) {
+  getBranches(repoElement.dataset.branchesUrl)
+}
+
 function displayRepositories(event) {
   var source = document.getElementById("repos-template").innerHTML;
   var template = Handlebars.compile(source);
@@ -26,6 +45,6 @@ function addClickRepoListeners(repositoriesElement) {
 }
 
 function handleRepoClick(event) {
+  getDetails(event.target)
   event.preventDefault()
-  debugger
 }
