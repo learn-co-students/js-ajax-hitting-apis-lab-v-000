@@ -69,6 +69,7 @@ describe('index', () => {
         document.getElementById("username").value = 'octocat'
         getRepositories()
         expect(requests.length).toBe(1)
+        debugger
         expect(requests[0].url).toBe('https://api.github.com/users/octocat/repos')
       })
     })
