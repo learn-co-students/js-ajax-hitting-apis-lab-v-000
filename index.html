@@ -22,6 +22,12 @@
     </head>
     <body>
     <main id="main">
+
+      <form action="#" onsubmit="getRepositories()">
+        <p>Username: <input type="text" id="username">
+        <input type="submit"></p>
+      </form>
+
     </main>
     <div class="flexbox-container">
       <div>
@@ -29,7 +35,7 @@
         <div id="repositories"></div>
       </div>
       <div>
-        <h3>Details</h3>
+        <h3 id="details-header">Details </h3>
         <div id="details"></div>
       </div>
     </div>
