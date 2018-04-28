@@ -22,10 +22,9 @@
     </head>
     <body>
     <main id="main">
-      <form>
-        <span>Github Username </span>
-        <input id="username" type="text" name="username" value="">
-        <input type="button" name="submit" value="Submit" onclick="getRepositories();">
+      <form onsubmit="getRepositories();return false;">
+        <input type="text" id="username"><br>
+        <input type="submit">
       </form>
     </main>
     <div class="flexbox-container">
@@ -38,7 +37,7 @@
         <div id="details"></div>
       </div>
     </div>
-    <script src="handlebars.min.js"></script>
+    <!-- <script src="handlebars.min.js"></script> Commented out, because lab wasn't designed for Handlebars and I can't get it to pass tests and submit properly-->
     <script src="index.js"></script>
     <!-- Open this file and call `mocha.run()` in console to run tests -->
     <div id="mocha"></div>
