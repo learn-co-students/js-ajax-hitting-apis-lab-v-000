@@ -15,7 +15,7 @@ function displayRepositories() {
 
 function getCommits(link) {
   const owner = link.dataset.username;
-  const repo = link.dataset.repo;
+  const repo = link.dataset.repository;
   const req = new XMLHttpRequest();
   req.addEventListener("load", displayCommits);
   req.open("GET", `https://api.github.com/repos/${owner}/${repo}/commits`);
@@ -23,13 +23,24 @@ function getCommits(link) {
 }
 
 function displayCommits() {
-
+  const resp = JSON.parse(this.responseText);
+  const template = Handlebars.compile(document.getElementById("commits-template").innerHTML);
+  const result = template(resp);
+  document.getElementById("details").innerHTML = result;
 }
 
-function getBranches() {
-
+function getBranches(link) {
+  const owner = link.dataset.username;
+  const repo = link.dataset.repository;
+  const req = new XMLHttpRequest();
+  req.addEventListener("load", displayBranches);
+  req.open("GET", `https://api.github.com/repos/${owner}/${repo}/branches`);
+  req.send();
 }
 
 function displayBranches() {
-
+  const resp = JSON.parse(this.responseText);
+  const template = Handlebars.compile(document.getElementById("branches-template").innerHTML);
+  const result = template(resp);
+  document.getElementById("details").innerHTML = result;
 }

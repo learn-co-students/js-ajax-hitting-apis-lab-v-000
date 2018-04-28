@@ -38,23 +38,8 @@
         <div id="details"></div>
       </div>
     </div>
+    <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
     <script src="index.js"></script>
-    <script id="repositories-template" type="text/x-handlebars-template">
-      {{#each this}}
-      <h2>{{name}}</h2>
-      <a href="{{html_url}}">See repo</a><br>
-      <a href="#" onclick="getBranches();">See all branches</a><br>
-      <a href="#" onclick="getCommits();" data-username="{{login}}" data-repository="{{}}">See all commits</a><br>
-      {{/each}}
-    </script>
-    <script id="commits-template" type="text/x-handlebars-template">
-      {{#each this}}
-      <h3></h3>
-      {{/each}}
-    </script>
-    <script id="branches-template" type="text/x-handlebars-template">
-
-    </script>
     <!-- Open this file and call `mocha.run()` in console to run tests -->
     <div id="mocha"></div>
     <script src="node_modules/mocha/mocha.js"></script>
@@ -62,5 +47,25 @@
     <script src="node_modules/sinon/pkg/sinon.js"></script>
     <script>mocha.setup('bdd');</script>
     <script src="test/index-test.js"></script>
+    <script id="repositories-template" type="text/x-handlebars-template">
+      {{#each this}}
+      <h2>{{name}}</h2>
+        <a href="{{html_url}}">See repo</a><br>
+        <a href="#" onclick="getBranches(this);" data-username="{{owner.login}}" data-repository="{{name}}">See all branches</a><br>
+        <a href="#" onclick="getCommits(this);" data-username="{{owner.login}}" data-repository="{{name}}">See all commits</a><br>
+      {{/each}}
+    </script>
+    <script id="commits-template" type="text/x-handlebars-template">
+      {{#each this}}
+        <p>Full Name: {{commit.committer.name}}</p>
+        <p>Username: {{committer.login}}</p>
+        <p>Message: {{commit.message}}</p>
+      {{/each}}
+    </script>
+    <script id="branches-template" type="text/x-handlebars-template">
+      {{#each this}}
+        <p>{{name}}</p>
+      {{/each}}
+    </script>
   </body>
 </html>
