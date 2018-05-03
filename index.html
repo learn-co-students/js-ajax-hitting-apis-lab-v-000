@@ -18,10 +18,24 @@
       .flexbox-container > div:first-child {
         margin-right: 20px;
       }
+      .center {
+        text-align:center;
+      }
+      .repos  {
+        list-style-type:none;
+      }
+      .details {
+        list-style-type: disc;
+      }
     </style>
     </head>
     <body>
-    <main id="main">
+    <main class="center" id="main">
+      <strong>Please enter a GitHub username:</strong>
+      <form onsubmit="getRepositories(); return false;">
+        <input type="text" id="username" name="username">
+        <input type="submit">
+      </form>
     </main>
     <div class="flexbox-container">
       <div>
