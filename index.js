@@ -7,7 +7,7 @@ function getRepositories() {
 }
 
 function getCommits(el) {
-  const username = document.getElementById("username").value
+  const username = el.dataset.username
   const name = el.dataset.repository
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayCommits)
@@ -16,20 +16,17 @@ function getCommits(el) {
 }
 
 function getBranches(el) {
-  const username = document.getElementById("username").value
-  const name = el.dataset.repository
+  const repo = el.dataset.repository
+  const username = el.dataset.username
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayBranches)
-  req.open("GET", 'https://api.github.com/repos/' + username + '/' + name + '/branches')
+  req.open("GET", 'https://api.github.com/repos/' + username + '/' + repo + '/branches')
   req.send()
 }
 
 function displayRepositories() {
-  const username = document.getElementById("username").value
   let repos = JSON.parse(this.responseText)
-  // const repoList = `<ul>${repos.map(r => '<li>' + r.name + ' ' + r.html_url + ' - ' + username + ' - <a href="#" data-repository="' + r.name + '" onclick="getCommits(this)">Get Commits</a>' + ' - <a href="#" data-repository="' + r.name + '" onclick="getBranches(this)">Get Branches</a></li>').join('')}</ul>`
-  const repoList = `<ul>${repos.map(r => '<li>' + '<a href=' + r.html_url + '>' + r.name + '</a>' + ' - ' + username + ' - <a href="#" data-repository="' + r.name + '" onclick="getCommits(this)">Get Commits</a>' + ' - <a href="#" data-repository="' + r.name + '" onclick="getBranches(this)">Get Branches</a></li>').join('')}</ul>`
-
+  const repoList = `<ul>${repos.map(r => `<li><a href="${r.html_url}">${r.name}</a> - ${r.owner.login} - <a href="#" data-repository="${r.name}" data-username="${r.owner.login}" onclick="getCommits(this)">Get Commits</a> - <a href="#" data-repository="${r.name}" data-username="${r.owner.login}" onclick="getBranches(this)">Get Branches</a></li>`).join('')}</ul>`
   document.getElementById("repositories").innerHTML = repoList
 }
 
