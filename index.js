@@ -6,7 +6,7 @@
 // Add a link to each repository that calls a getBranches function when clicked and, when complete, calls a displayBranches function that fills the details div with a list of names of each branch of the repository. Give the link data attributes of username and repository for use by the getBranches function.
 
 function getRepositories() {
-  let userName = document.getElementById('user_name').value;
+  let userName = document.getElementById('username').value;
   const req = new XMLHttpRequest();
   req.addEventListener("load", showRepositories);
   req.open("GET", 'https://api.github.com/users/' + userName + '/repos');
@@ -24,12 +24,12 @@ function getCommits(el) {
   const userName = el.dataset.username
   const repoName = el.dataset.repo
   const req = new XMLHttpRequest()
-  req.addEventListener("load", showCommits)
+  req.addEventListener("load", displayCommits)
   req.open("GET", 'https://api.github.com/repos/' + userName + '/' + repoName + '/commits')
   req.send()
 }
 
-function showCommits() {
+function displayCommits() {
   const commits = JSON.parse(this.responseText)
   const commitsList = `<ul>${commits.map(commit => '<li><strong>' + commit.author.login + '</strong> - ' + commit.commit.message + '</li>').join('')}</ul>`
   document.getElementById('details').innerHTML = commitsList
