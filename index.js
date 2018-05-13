@@ -8,16 +8,18 @@
 function getRepositories() {
   let userName = document.getElementById('username').value;
   const req = new XMLHttpRequest();
-  req.addEventListener("load", showRepositories);
+  req.addEventListener("load", displayRepositories);
   req.open("GET", 'https://api.github.com/users/' + userName + '/repos');
   req.send()
 }
 
-function showRepositories() {
+
+
+function displayRepositories() {
   const repos = JSON.parse(this.responseText)
   const repoList = "<ul>" + repos.map(repo => {
     const dataUserName = 'data-username="' + repo.owner.login + '"';
-    const dataRepoName = 'data-reponame="' + repo.name + '"';
+    const dataRepoName = 'data-repository="' + repo.name + '"';
     return(`
       <li>
       <h2>${repo.name}</h2>
@@ -32,8 +34,8 @@ function showRepositories() {
 
 function getCommits(el) {
   const userName = el.dataset.username;
-  const repoName = el.dataset.reponame;
-  const url = 'https://api.github.com/repos/' + userName + '/' + repoName + '/commits';
+  const repoName = el.dataset.repository;
+  const url = "https://api.github.com/repos/" + userName + "/" + repoName + "/commits";
   console.log(url);
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayCommits)
@@ -41,9 +43,12 @@ function getCommits(el) {
   req.send()
 }
 
+
+// The display of commits should include the author's Github name, the author's full name, and the commit message
 function displayCommits() {
   const commits = JSON.parse(this.responseText)
-  const commitsList = `<ul>${commits.map(commit => '<li><strong>' + commit.author.login + '</strong> - ' + commit.commit.message + '</li>').join('')}</ul>`
+  const commitsList = `<ul>${commits.map(commit => 
+    '<li><strong>' + commit.author.login + '</strong> - ' + commit.commit.message + '</li>').join('')}</ul>`
   document.getElementById('details').innerHTML = commitsList
 }
 
