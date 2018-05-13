@@ -13,19 +13,31 @@ function getRepositories() {
   req.send()
 }
 
-
-function showRepositories(event, data) {
-  var repos = JSON.parse(this.responseText)
-  const repoList = `<ul>${repos.map(r => '<li>' + '<a href="' + r.html_url + '">' + r.name + '</a>' + ' - <a href="#" data-username="' + r.owner.login + '" data-repo="' + r.name + '" + onclick="getCommits(this)">Get Commits</a></li>').join('')}</ul>`
+function showRepositories() {
+  const repos = JSON.parse(this.responseText)
+  const repoList = "<ul>" + repos.map(repo => {
+    const dataUserName = 'data-username="' + repo.owner.login + '"';
+    const dataRepoName = 'data-reponame="' + repo.name + '"';
+    return(`
+      <li>
+      <h2>${repo.name}</h2>
+      <a href="${repo.html_url}">${repo.html_url}</a><br>
+      <a href="#" ${dataUserName} ${dataRepoName} onclick="getCommits(this)">Get Commits</a><br>
+      <a href="#" ${dataUserName} ${dataRepoName} onclick="getBranches(this)">Get Branches</a><br>
+      </li>
+      `)
+    }).join('') + "</ul>";
   document.getElementById("repositories").innerHTML = repoList;
 }
 
 function getCommits(el) {
-  const userName = el.dataset.username
-  const repoName = el.dataset.repo
+  const userName = el.dataset.username;
+  const repoName = el.dataset.reponame;
+  const url = 'https://api.github.com/repos/' + userName + '/' + repoName + '/commits';
+  console.log(url);
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayCommits)
-  req.open("GET", 'https://api.github.com/repos/' + userName + '/' + repoName + '/commits')
+  req.open("GET", url)
   req.send()
 }
 
@@ -33,5 +45,9 @@ function displayCommits() {
   const commits = JSON.parse(this.responseText)
   const commitsList = `<ul>${commits.map(commit => '<li><strong>' + commit.author.login + '</strong> - ' + commit.commit.message + '</li>').join('')}</ul>`
   document.getElementById('details').innerHTML = commitsList
+}
+
+function getBranches() {
+
 }
 
