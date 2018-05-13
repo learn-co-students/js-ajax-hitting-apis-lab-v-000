@@ -3,7 +3,7 @@
 // Add a link to each repository that calls a getCommits function on click and, when the request is complete, calls a displayCommits function that fills the details div with a list of commits for that repository. The display of commits should include the author's Github name, the author's full name, and the commit message. Give the link data attributes of username and repository to be used by the getCommits function.
 
 
-// Add a link to each repository that calls a getBranches function when clicked and, when complete, calls a displayBranches function that fills the details div with a list of names of each branch of the repository. Give the link data attributes of username and repository for use by the getBranches function.
+
 
 function getRepositories() {
   let userName = document.getElementById('username').value;
@@ -36,7 +36,6 @@ function getCommits(el) {
   const userName = el.dataset.username;
   const repoName = el.dataset.repository;
   const url = "https://api.github.com/repos/" + userName + "/" + repoName + "/commits";
-  console.log(url);
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayCommits)
   req.open("GET", url)
@@ -48,11 +47,26 @@ function getCommits(el) {
 function displayCommits() {
   const commits = JSON.parse(this.responseText)
   const commitsList = `<ul>${commits.map(commit => 
-    '<li><strong>' + commit.author.login + '</strong> - ' + commit.commit.message + '</li>').join('')}</ul>`
+    '<li><strong>' + commit.commit.author.name + ' (' + commit.author.login + ')</h3>' + commit.commit.message + '</li>').join('')}</ul>`
   document.getElementById('details').innerHTML = commitsList
 }
 
-function getBranches() {
-
+function getBranches(el) {
+  const userName = el.dataset.username;
+  const repoName = el.dataset.repository;
+  const url = "https://api.github.com/repos/" + userName + "/" + repoName + "/branches"
+  const req = new XMLHttpRequest()
+  req.addEventListener("load", displayBranches)
+  req.open("GET", url)
+  req.send()
 }
 
+function displayBranches() {
+  const branches = JSON.parse(this.responseText);
+  const branchesList = `<ul>${branches.map(branch => 
+    
+  ).join('')}</ul>`
+  document.getElementById('details').innerHTML = branchesList
+}
+
+// Add a link to each repository that calls a getBranches function when clicked and, when complete, calls a displayBranches function that fills the details div with a list of names of each branch of the repository. Give the link data attributes of username and repository for use by the getBranches function.
