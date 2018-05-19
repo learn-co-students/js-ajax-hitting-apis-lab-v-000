@@ -22,7 +22,12 @@
     </head>
     <body>
     <main id="main">
+      <script src="index.js"></script>
     </main>
+    <form id="repo-form" onsubmit="getRepositories();return false;">
+        Username: <input type="text" id="username"><br>
+        <input type="submit">
+    </form>
     <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
