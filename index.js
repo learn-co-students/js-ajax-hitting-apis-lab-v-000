@@ -9,3 +9,25 @@ function getRepositories(){
   req.send()
   return false
 }
+
+
+function displayRepositories(){
+  var repos = JSON.parse(this.responseText)
+  const repoList = `<ul>${repos.map(r => '<li>'+ r.name )}`
+
+
+function getcommits(){
+
+}
+
+function getBranches() {
+
+}
+
+function displayCommits() {
+
+}
+
+function displayBranches(){
+
+}
