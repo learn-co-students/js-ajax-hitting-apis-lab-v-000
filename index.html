@@ -22,7 +22,12 @@
     </head>
     <body>
     <main id="main">
+      <script src="index.js"></script>
     </main>
+    <form id="repo-form" onsubmit="getRepositories();return false;">
+        Username: <input type="text" id="username"><br>
+        <input type="submit">
+    </form>
     <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
@@ -30,7 +35,11 @@
       </div>
       <div>
         <h3>Details</h3>
-        <div id="details"></div>
+        <div id="details">
+          <div id="commits"></div>
+          <div id="branches"></div>
+
+        </div>
       </div>
     </div>
     <script src="index.js"></script>
