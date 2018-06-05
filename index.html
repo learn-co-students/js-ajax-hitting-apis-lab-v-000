@@ -26,6 +26,9 @@
     <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
+        <form onsubmit="getRepositories(); return false;">
+          enter github username: <input type="text" id="username">
+          <input type="submit">
         <div id="repositories"></div>
       </div>
       <div>
