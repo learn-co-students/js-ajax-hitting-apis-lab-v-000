@@ -14,14 +14,13 @@ function displayRepositories(event, data) {
     console.log(jsonRepo)
     const repoList = `<ul>${jsonRepo.map( r=> '<li>' + r.name + 
                                                 ' - <a href="' + r.html_url + '">' + r.html_url + '</a>' +
-                                                ' - <a href="#" data-repo-name="' + r.name + '" data-owner-name="'+ r.owner.login + '" onclick="getCommits(this)">Get Commits</a></li>').join('')}</ul>`;
+                                                ' - <a href="#" data-repository="' + r.name + '" data-username="'+ r.owner.login + '" onclick="getCommits(this)">Get Commits</a></li>').join('')}</ul>`;
     document.getElementById("repositories").innerHTML = repoList
 }
 
 function getCommits(el) {
-    console.log(`el: ${el}`)
-    const repoName = el.dataset.repoName;
-    const owner = el.dataset.ownerName;
+    const repoName = el.dataset.repository;
+    const owner = el.dataset.username;
     const req = new XMLHttpRequest();
     req.addEventListener("load", displayCommits);
     req.open("GET", `https://api.github.com/repos/${owner}/${repoName}/commits`);
