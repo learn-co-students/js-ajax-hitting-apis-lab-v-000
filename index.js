@@ -1,4 +1,5 @@
 
+const rootURL = "https://api.github.com"
 
 function username() {
   let username = document.getElementById('username').value;
@@ -7,29 +8,43 @@ function username() {
 
 
 function getRepositories() { 
+  const uri = rootURL + "/users/" + username() + "/repos"
   const req = new XMLHttpRequest();
  
   req.addEventListener("load", displayRepositories);
-  req.open("GET", 'https://api.github.com/users/'+ username() +'/repos');
+  req.open("GET", uri);
   req.send();
 }
 
 function displayRepositories() {
-  var repos = JSON.parse(this.responseText)
-  const repoList = `<ul>${repos.map(r => '<li>' + r.name + ' url: ' + '<a href="' + r.url +'">Repo</a>'  + ' Author: ' + username() + ' - <a href="#" data-user="'+ username() +'" data-repo="' + r.name + '" onclick="getCommits(this)">Get Commits</a></li>').join('')}</ul>`
-  document.getElementById('repositories').innerHTML = repoList
+  const repos = JSON.parse(this.responseText)
+  const repoList = "<ul>" + repos.map(repo => {
+    const dataUsername = 'data-username="' + repo.owner.login + '"'
+    const dataRepoName = 'data-repository="' + repo.name + '"'
+    return(`
+          <li>
+            <h2>${repo.name}</h2>
+            <a href="${repo.html_url}">${repo.html_url}</a><br>
+            <a href="#" ${dataRepoName} ${dataUsername} onclick="getCommits(this)">Get Commits</a><br>
+            <a href="#" ${dataRepoName} ${dataUsername} onclick="getBranches(this)">Get Branches</a></li>
+          </li>`
+          )
+  }).join('') + "</ul>";
+  document.getElementById("repositories").innerHTML = repoList
 }
 
 
 function getCommits(el) {  
-  const repoName = el.dataset.repo
-  const user = el.dataset.user;
+  
+  let repoName = el.dataset.repository
+  const uri = rootURL + "/repos/" + el.dataset.username + "/" + repoName + "/branches"
 
   const req = new XMLHttpRequest()
-
+  
   req.addEventListener("load", displayCommits)
-  req.open("GET", 'https://api.github.com/repos/'+ user + '/' + repoName + '/commits')
+  req.open("GET", uri)
   req.send()
+  
 }
 
 
