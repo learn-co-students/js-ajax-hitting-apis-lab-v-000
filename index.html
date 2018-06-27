@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>JavaScript GitHub API with XHR</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="node_modules/mocha/mocha.css">
     <style>
        .flexbox-container {
@@ -22,6 +23,11 @@
     </head>
     <body>
     <main id="main">
+      <form id="form" onsubmit="getRepositories();return false">
+        <label for="username">Username:</label>
+        <input type="text" id="username">
+        <input type="submit">
+      </form>
     </main>
     <div class="flexbox-container">
       <div>
