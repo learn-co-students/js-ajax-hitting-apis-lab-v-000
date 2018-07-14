@@ -14,7 +14,7 @@ to create our own applications that extend Github's functionality.
 
 The documentation is extensive and well-organized. For instance,
 anything you can do regarding a Github repository will be under the
-[Repositories](https://developer.github.com/v3/repos/) section.
+[Repositories](https://devoper.github.com/v3/repos/) section.
 
 Each section is broken down by function, and tells you exactly what you
 need to know to request that API endpoint, including any URI parameters
