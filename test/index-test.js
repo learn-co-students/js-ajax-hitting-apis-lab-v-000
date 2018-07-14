@@ -1,7 +1,7 @@
 describe('index', () => {
   describe('page', () => {
     it('has a form', () => {
-      var form = document.getElementsByTagName("form")[0]
+      let form = document.getElementsByTagName("form")[0]
       expect(form).toExist()
       expect(form).toMatch(/getRepositories()/)
       expect(document.getElementById("username")).toExist()
@@ -11,7 +11,7 @@ describe('index', () => {
   describe('callback functions', () => {
     describe('displayCommits', () => {
       it('parses and displays json values', () => {
-        var resp = { responseText: commitsData() }
+        let resp = { responseText: commitsData() }
         displayCommits.call(resp)
         el = document.getElementById("details")
         expect(el.innerHTML).toMatch(/Monalisa Octocat/)
@@ -22,7 +22,7 @@ describe('index', () => {
 
     describe('displayBranches', () => {
       it('parses and displays json values', () => {
-        var resp = { responseText: branchesData() }
+        let resp = { responseText: branchesData() }
         displayBranches.call(resp)
         el = document.getElementById("details")
         expect(el.innerHTML).toMatch(/master/)
@@ -30,7 +30,7 @@ describe('index', () => {
     })
     describe('displayRepositories', () => {
       it('parses and displays json values', () => {
-        var resp = { responseText: reposData() }
+        let resp = { responseText: reposData() }
         displayRepositories.call(resp)
         el = document.getElementById("repositories")
         expect(el.innerHTML).toMatch(/Hello-World/)
