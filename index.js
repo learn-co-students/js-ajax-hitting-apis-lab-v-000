@@ -33,9 +33,10 @@ function getCommits(el) {
   const name = el.dataset.repository
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayCommits)
-  req.open("GET", 'https://api.github.com/repos/octocat/' + name + '/details')
+  req.open("GET", 'https://api.github.com/repos/octocat/' + name + '/commits')
   req.send()
 }
+
 
 function displayCommits() {
   const commits = JSON.parse(this.responseText)
