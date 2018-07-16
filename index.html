@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title>JavaScript GitHub API with XHR</title>
     <link rel="stylesheet" type="text/css" href="node_modules/mocha/mocha.css">
     <style>
@@ -22,6 +23,10 @@
     </head>
     <body>
     <main id="main">
+      <form onclick="getRepositories(event)">
+        Username: <input type="text" name="username" id="username"><br>
+        <button type="submit">Get Repositories</button>
+      </form>
     </main>
     <div class="flexbox-container">
       <div>
