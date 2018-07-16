@@ -8,31 +8,7 @@ JavaScript GitHub API with XHR
 
 ## Introduction
 
-The [GitHub API](https://developer.github.com/v3/) provides access to a
-lot of interesting and useful data that we can use with `XMLHttpRequest`
-to create our own applications that extend Github's functionality.
 
-The documentation is extensive and well-organized. For instance,
-anything you can do regarding a Github repository will be under the
-[Repositories](https://developer.github.com/v3/repos/) section.
-
-Each section is broken down by function, and tells you exactly what you
-need to know to request that API endpoint, including any URI parameters
-(denoted by colons in the parameter, like `/repos/:username`) you'll
-need to provide and an example of the response JSON.
-
-Read through the [overview](https://developer.github.com/v3/) section to
-learn how to interact with the Github API. We won't be using any
-functions that require authentication, so don't worry about that too
-much yet. After that, read through the [repositories](https://developer.github.com/v3/repos/) section and get an idea of the types of things you can do with repository data.
-
-Once you're done exploring, you'll put that knowledge to the test to
-create a simple repository browser. Follow the directions below to
-create a page that allows you to dynamically browse repositories,
-commits, and branches using XHR.
-
-A basic HTML structure has been provided for you. Make sure to run
-tests and try it out in your browser to see it in action!
 
 ## Instructions
 
