@@ -43,19 +43,20 @@ function displayCommits() {
   document.getElementById("details").innerHTML = commitsList
 }
 
-function getBranches(el) {
-  const name = el.dataset.repository
-  const req = new XMLHttpRequest()
-  req.addEventListener("load", displayBranches)
-  req.open("GET", 'https://api.github.com/repos/octocat/' + name + '/branches')
-  req.send()
-}
-
-function displayBranches() {
-  const branches = JSON.parse(this.responseText)
-  const branchesList = `<ul>${branches.map(branch => '<li>' '<strong>' + branch.name + '</strong> - ' '</li>').join('')}</ul>`
-  document.getElementById("details").innerHTML = branchesList
-}
+//
+// function getBranches(el) {
+//   const name = el.dataset.repository
+//   const req = new XMLHttpRequest()
+//   req.addEventListener("load", displayBranches)
+//   req.open("GET", 'https://api.github.com/repos/octocat/' + name + '/branches')
+//   req.send()
+// }
+//
+// function displayBranches() {
+//   const branches = JSON.parse(this.responseText)
+//   const branchesList = `<ul>${branches.map(branch => '<li><strong>' + branch.name + '</strong> - ' '</li>').join('')}</ul>`
+//   document.getElementById("details").innerHTML = branchesList
+// }
 
 // Add a link to each repository that calls a getBranches function when clicked and, when complete,
 // calls a displayBranches function that fills the details div with a list of names of each branch of the repository.
