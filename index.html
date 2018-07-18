@@ -24,6 +24,10 @@
     <main id="main">
     </main>
     <div class="flexbox-container">
+      <form onsubmit="getRepositories(); return false;">
+        Github Username: <input type="text" id="username" />
+        <input type="submit" value="Submit">
+      </form>
       <div>
         <h3>Repositories</h3>
         <div id="repositories"></div>
