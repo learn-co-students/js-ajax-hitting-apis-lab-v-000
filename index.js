@@ -25,7 +25,7 @@ function getRepositories() {
 function showRepositories(event, data) {
   var repos = JSON.parse(this.responseText)
   console.log(repos)
-  const repoList = `<ul>${repos.map(r => '<li>' + r.name + ' - <a href="#" data-repository="' + r.name + '" onclick="getCommits(this)">Get Commits</a> - <a href="#" data-repository="' + r.name + '" onclick="getBranches(this)">Get Branches</a></li>').join('')}</ul>`
+  const repoList = `<ul>${repos.map(r => '<li>' + r.name + ' - <a href="#" data-repository="' + r.name + '" onclick="getCommits(this)">Get Commits</a> - <a href="#" data-username="' + r.name + '" onclick="getBranches(this)">Get Branches</a></li>').join('')}</ul>`
   document.getElementById("repositories").innerHTML = repoList
 }
 
@@ -43,20 +43,19 @@ function displayCommits() {
   document.getElementById("details").innerHTML = commitsList
 }
 
-//
-// function getBranches(el) {
-//   const name = el.dataset.repository
-//   const req = new XMLHttpRequest()
-//   req.addEventListener("load", displayBranches)
-//   req.open("GET", 'https://api.github.com/repos/octocat/' + name + '/branches')
-//   req.send()
-// }
-//
-// function displayBranches() {
-//   const branches = JSON.parse(this.responseText)
-//   const branchesList = `<ul>${branches.map(branch => '<li><strong>' + branch.name + '</strong> - ' '</li>').join('')}</ul>`
-//   document.getElementById("details").innerHTML = branchesList
-// }
+function getBranches(el) {
+  const name = el.dataset.username
+  const req = new XMLHttpRequest()
+  req.addEventListener("load", displayBranches)
+  req.open("GET", 'https://api.github.com/repos/octocat/' + name + '/commits')
+  req.send()
+}
+
+function displayBranches() {
+  const commits = JSON.parse(this.responseText)
+  const commitsList = `<ul>${commits.map(commit => '<li>' + commit.author.login + ' <strong>' + commit.commit.author.name + '</strong> - ' + commit.commit.message + '</li>').join('')}</ul>`
+  document.getElementById("details").innerHTML = commitsList
+}
 
 // Add a link to each repository that calls a getBranches function when clicked and, when complete,
 // calls a displayBranches function that fills the details div with a list of names of each branch of the repository.
