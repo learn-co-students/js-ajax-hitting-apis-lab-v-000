@@ -39,6 +39,7 @@ function displayCommits() {
     console.log(commits[i].author);
   }
 
+  // ** NOTE : For some reason, need to dive into the "commit.commit" for the author's full name, just like getting the "commit.commit.message", while also using the "commit.author.login" to get the author's username...
   const commitsList = `<ul>${commits.map(commit => '<li><strong>' + commit.commit.author.name + '</strong> (' + commit.author.login + ') - ' + commit.commit.message + '</li>').join('')}</ul>`
   document.getElementById("details").innerHTML = commitsList
 }
