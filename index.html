@@ -19,11 +19,15 @@
         margin-right: 20px;
       }
     </style>
-    </head>
+  </head>
     <body>
     <main id="main">
     </main>
     <div class="flexbox-container">
+      <form id="username-form" onsubmit="getRepositories(); return false">
+        <input type="text" id="username"><br>
+        <input type="submit">
+      </form>
       <div>
         <h3>Repositories</h3>
         <div id="repositories"></div>
