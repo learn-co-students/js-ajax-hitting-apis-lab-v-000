@@ -31,13 +31,13 @@ function getBranches(el) {
   const name = el.dataset.username
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayBranches)
-  req.open("GET", 'https://api.github.com/repos/octocat/' + name + '/commits')
+  req.open("GET", 'https://api.github.com/repos/octocat/' + name + '/branches')
   req.send()
 }
 
 function displayBranches() {
-  const commits = JSON.parse(this.responseText)
-  const commitsList = `<ul>${commits.map(commit => '<li>' + commit.author.login + ' <strong>' + commit.commit.author.name + '</strong> - ' + commit.commit.message + '</li>').join('')}</ul>`
+  const branches = JSON.parse(this.responseText)
+  const commitsList = `<ul>${branches.map(branch => '<li>' + branch.author.login + ' <strong>' + branch.commit.author.name + '</strong> - ' + branch.commit.message + '</li>').join('')}</ul>`
   document.getElementById("details").innerHTML = commitsList
 }
 
