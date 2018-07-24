@@ -24,10 +24,8 @@
     <main id="main">
     </main>
     <div class="flexbox-container">
-      <form>
-      User name:<br><input type="text" name="username"><br>
-      <a href="#" onclick="getRepositories()">Get Repositories</a>
-    </form>
+      <form id="form" onsubmit="getRepositories()">
+      </form>
       <div>
         <h3>Repositories</h3>
         <div id="repositories"></div>
