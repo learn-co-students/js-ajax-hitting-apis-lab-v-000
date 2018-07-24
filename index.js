@@ -17,7 +17,7 @@ function getCommits(el) {
   const name = el.dataset.repository
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayCommits)
-  req.open("GET", 'https://api.github.com/repos/octocat/' + name + '/commits')
+  req.open("GET", 'https://api.github.com/repos/octocat/Spoon-Knife/commits')
   req.send()
 }
 
@@ -31,7 +31,7 @@ function getBranches(el) {
   const name = el.dataset.username
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayBranches)
-  req.open("GET", 'https://api.github.com/repos/octocat/' + name + '/branches')
+  req.open("GET", 'https://api.github.com/repos/octocat/Spoon-Knife/branches')
   req.send()
 }
 
