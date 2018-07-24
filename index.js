@@ -9,7 +9,7 @@ function getRepositories() {
 function displayRepositories(event, data) {
   var repos = JSON.parse(this.responseText)
   console.log(repos)
-  const repoList = '<ul><li>Hello-World - <a href="#" data-repository="Hello-World" onclick="getCommits(this)">Get Commits</a> - <a href="#" data-username="Hello-World" onclick="getBranches(this)">Get Branches</a></li></ul>'
+  const repoList = '<ul><li>Hello-World - <a href="#" data-repository="’ + r.name + ‘" onclick="getCommits(this)">Get Commits</a> - <a href="#" data-username="’ + r.name + ‘" onclick="getBranches(this)">Get Branches</a></li></ul>'
   document.getElementById("repositories").innerHTML = repoList
 }
 
