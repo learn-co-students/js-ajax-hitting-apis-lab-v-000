@@ -12,7 +12,7 @@ function displayRepositories(event, data) {
 	const repoList = `<ul>${repos.map(r => `<li><a href="${r.html_url}">${r.name}</a> - <a href="#" data-repository="${r.name}" 
 		data-username="${r.owner.login}" onclick="getCommits(this)">Get Commits</a> - 
 		<a href="#" data-repository="${r.name}" data-username="${r.owner.login}" 
-		onclick="getBranches(this)">Get Branches</a></li>`)}</ul>`;
+		onclick="getBranches(this)">Get Branches</a></li>`).join('')}</ul>`;
   	document.getElementById("repositories").innerHTML = repoList;
 }
 
@@ -28,7 +28,7 @@ function getCommits(repo) {
 function displayCommits() {
 	const commits = JSON.parse(this.responseText);
 	const commitsList = `<ul>${commits.map(c => `<li>${c.commit.author.name}(${c.author.login}): 
-		${c.commit.message}</li>`)}</ul>`;
+		${c.commit.message}</li>`).join('')}</ul>`;
 	document.getElementById("details").innerHTML = commitsList;
 }
 
@@ -43,6 +43,6 @@ function getBranches(repo) {
 
 function displayBranches() {
 	const branches = JSON.parse(this.responseText);
-	const branchesList = `<ul>${branches.map(b => `<li>${b.name}</li>`)}</ul>`;
+	const branchesList = `<ul>${branches.map(b => `<li>${b.name}</li>`).join('')}</ul>`;
 	document.getElementById("details").innerHTML = branchesList;
 }
