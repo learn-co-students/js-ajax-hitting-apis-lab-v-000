@@ -20,9 +20,15 @@
       }
     </style>
     </head>
+
     <body>
     <main id="main">
+      <form onSubmit="getRepositories(); return false;" >
+        <input type="text" id="username"><br>
+        <input type="submit">
+      </form>
     </main>
+
     <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
