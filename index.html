@@ -25,6 +25,12 @@
     </main>
     <div class="flexbox-container">
       <div>
+        <form onsubmit="getRepositories(); return false;">
+          Username: <input type="text" id="username">
+          <input type="submit">
+        </form>
+      </div>
+      <div>
         <h3>Repositories</h3>
         <div id="repositories"></div>
       </div>
@@ -34,6 +40,8 @@
       </div>
     </div>
     <script src="index.js"></script>
+    <!--Create a form with a username field that calls a getRepositories function that loads the repositories div with a list of public repositories for that user. The displayed repositories should include the name and a link to the URL (HTML URL, not API URL).
+    Name | URL Link-->
     <!-- Open this file and call `mocha.run()` in console to run tests -->
     <div id="mocha"></div>
     <script src="node_modules/mocha/mocha.js"></script>
