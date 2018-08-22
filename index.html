@@ -22,9 +22,14 @@
     </head>
     <body>
     <main id="main">
-    </main>
+
     <div class="flexbox-container">
       <div>
+
+        <form id="form" onsubmit="getRepositories()">
+          <input type = "text" id="username">
+          <input type ="submit">
+        </form>
         <h3>Repositories</h3>
         <div id="repositories"></div>
       </div>
@@ -33,6 +38,7 @@
         <div id="details"></div>
       </div>
     </div>
+    </main>
     <script src="index.js"></script>
     <!-- Open this file and call `mocha.run()` in console to run tests -->
     <div id="mocha"></div>
