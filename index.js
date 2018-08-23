@@ -32,9 +32,9 @@ function getCommits(el) {
 
 function displayRepositories(event, data) {
   const repos = JSON.parse(this.responseText)
-  console.log(repos)
   const repoList = `<ul>${repos.map(r => {
-    return `<li> <a href="'${r.svn_url}'">${r.name}</a> -
+    console.log(r)
+    return `<li> <a href="${r.html_url}">${r.name}</a> -
       <a
         href="#"
         data-username="${r.owner.login}"
