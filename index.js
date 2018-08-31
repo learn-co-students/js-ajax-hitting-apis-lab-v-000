@@ -17,13 +17,13 @@ function getCommits(el) {
   const req = new XMLHttpRequest();
   const repo = el.dataset.repository;
   const user = el.dataset.username;
-  req.addEventListener("load", showCommits);
+  req.addEventListener("load", displayCommits);
   req.open("GET", `https://api.github.com/repos/${user}/${repo}/commits`);
   req.send();
 }
 
-function showCommits () {
+function displayCommits () {
   const commits = JSON.parse(this.responseText);
-  const commitsList = `<ul>${commits.map(commit => '<li><strong>' + commit.author.login + '</strong> - ' + commit.commit.message + '</li>').join('')}</ul>`;
-  document.getElementById("commits").innerHTML = commitsList;
+  const commitsList = `${commits.map(c => `${c.commit.author.name}/${c.author.login}/${c.commit.message}`)}`;
+  document.getElementById("details").innerHTML = commitsList;
 }
