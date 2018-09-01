@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>JavaScript GitHub API with XHR</title>
-    <link rel="stylesheet" type="text/css" href="node_modules/mocha/mocha.css">
+    <title>JavaScript XHR</title>
     <style>
-       .flexbox-container {
-         display: -ms-flex;
-         display: -webkit-flex;
-         display: flex;
-       }
+      .flexbox-container {
+        display: -ms-flex;
+        display: -webkit-flex;
+        display: flex;
+      }
 
       .flexbox-container > div {
         width: 50%;
@@ -19,27 +18,44 @@
         margin-right: 20px;
       }
     </style>
-    </head>
-    <body>
-    <main id="main">
+  </head>
+  <body>
+
+    <main>
+      <div>
+        <form onsubmit="getRepositories(); return false;"">
+          <h2>Username: <input type="text" id="username"></h2>
+          <input type="submit">
+        </form>
+      </div>
     </main>
+
+
     <div class="flexbox-container">
+
       <div>
         <h3>Repositories</h3>
-        <div id="repositories"></div>
+<!--         <a href="#" onclick="getRepositories()">Get Repositories</a> -->
+         <div id="repositories"></div>
       </div>
+
+
       <div>
-        <h3>Details</h3>
-        <div id="details"></div>
+        <h3>Commits</h3>
+        <div id="commits"></div>
       </div>
+
+
+      <div>
+        <h3>Branches</h3>
+        <div id="commits"></div>
+      </div>
+
     </div>
+
+
+    
     <script src="index.js"></script>
-    <!-- Open this file and call `mocha.run()` in console to run tests -->
-    <div id="mocha"></div>
-    <script src="node_modules/mocha/mocha.js"></script>
-    <script src="node_modules/expect/umd/expect.min.js"></script>
-    <script src="node_modules/sinon/pkg/sinon.js"></script>
-    <script>mocha.setup('bdd');</script>
-    <script src="test/index-test.js"></script>
   </body>
 </html>
+
