@@ -20,10 +20,12 @@ function getRepositories() {
 
 
 function getCommits(el) {
+  debugger
   const name = el.dataset.repo
+  let username = document.getElementById('username').value
   const req = new XMLHttpRequest()
   req.addEventListener("load", showCommits)
-  req.open("GET", 'https://api.github.com/repos/tsyaeger/' + name + '/commits')
+  req.open("GET", 'https://api.github.com/repos/' + username + '/' + name + '/commits')
   req.send()
 }
 
@@ -38,9 +40,10 @@ function showCommits() {
 
 function getBranches(el) {
   const name = el.dataset.repo
+  let username = document.getElementById('username').value
   const req = new XMLHttpRequest()
   req.addEventListener("load", showBranches)
-  req.open("GET", 'https://api.github.com/repos/tsyaeger/' + name + '/branches')
+  req.open("GET", 'https://api.github.com/repos/' + username + '/' + name + '/branches')
   req.send()
 }
 
