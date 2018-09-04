@@ -30,9 +30,9 @@
         <div id="repositories"></div>
         <form>
           Enter your Github Username:<input id="username" name="username" type="text"><br>
-          <input onclick="getRepositories()" type="submit"><br>
-          <div id="repositories"></div>
+          <input onsubmit="getRepositories();return false" type="submit"><br>
         </form>
+          <div id="repositories"></div>
       </div>
       <div>
   <h3>Commits</h3>
