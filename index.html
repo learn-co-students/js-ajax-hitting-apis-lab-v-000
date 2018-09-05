@@ -43,7 +43,8 @@
     <script src="test/index-test.js"></script>
 <!-- A form that triggers getRespositories and appends to a repositiories div -->
 
-<form id="" onSubmit="getRepositories()">
+<!--because the defualt behavior of a form is to reload, we must explicitly prevent default -->
+<form id="" onSubmit="getRepositories();return false;">
 Enter Username: <input id="username" type="text">
 </form>
 
