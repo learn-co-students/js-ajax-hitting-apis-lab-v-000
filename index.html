@@ -26,6 +26,12 @@
     <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
+        <form action='/' method='post'>
+          <label>Username:
+            <input type="text" id="username">
+          </label>
+          <input type="button" value="Get Repos!" onclick="getRepositories()">
+        </form>
         <div id="repositories"></div>
       </div>
       <div>
