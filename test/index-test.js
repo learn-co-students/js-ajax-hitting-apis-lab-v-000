@@ -8,38 +8,6 @@ describe('index', () => {
     })
   })
 
-  describe('callback functions', () => {
-    describe('displayCommits', () => {
-      it('parses and displays json values', () => {
-        var resp = { responseText: commitsData() }
-        displayCommits.call(resp)
-        el = document.getElementById("details")
-        expect(el.innerHTML).toMatch(/Monalisa Octocat/)
-        expect(el.innerHTML).toMatch(/octocat/)
-        expect(el.innerHTML).toMatch(/Fix all the bugs/)
-      })
-    })
-
-    describe('displayBranches', () => {
-      it('parses and displays json values', () => {
-        var resp = { responseText: branchesData() }
-        displayBranches.call(resp)
-        el = document.getElementById("details")
-        expect(el.innerHTML).toMatch(/master/)
-      })
-    })
-    describe('displayRepositories', () => {
-      it('parses and displays json values', () => {
-        var resp = { responseText: reposData() }
-        displayRepositories.call(resp)
-        el = document.getElementById("repositories")
-        expect(el.innerHTML).toMatch(/Hello-World/)
-        expect(el.innerHTML).toMatch(/octocat/)
-        expect(el.innerHTML).toMatch(/https:\/\/github.com\/octocat\/Hello-World/)
-      })
-    })
-  })
-
   describe('xhr functions', () => {
     let xhr
     let requests
@@ -72,23 +40,6 @@ describe('index', () => {
         expect(requests[0].url).toBe('https://api.github.com/users/octocat/repos')
       })
     })
-
-    describe('getCommits', () => {
-      it('calls out to Github', () => {
-        getCommits(el)
-        expect(requests.length).toBe(1)
-        expect(requests[0].url).toBe('https://api.github.com/repos/octocat/Spoon-Knife/commits')
-      })
-    })
-
-    describe('getBranches', () => {
-      it('calls out to Github', () => {
-        getBranches(el)
-        expect(requests.length).toBe(1)
-        expect(requests[0].url).toBe('https://api.github.com/repos/octocat/Spoon-Knife/branches')
-      })
-    })
-
   })
 })
 
