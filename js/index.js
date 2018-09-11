@@ -26,11 +26,12 @@ function displayCommits(ev) {
   const commits = JSON.parse(this.responseText);
   const commitsList = `<ul>${commits
      .map(
-       commit =>
+       commitInfo =>
          '<li><strong>' +
-         commit.author.login +
+         commitInfo.author.login + ' - ' +
+         commitInfo.commit.author.name +
          '</strong> - ' +
-         commit.commit.message +
+         commitInfo.commit.message +
          '</li>'
      )
      .join('')}</ul>`;
@@ -46,7 +47,7 @@ function getCommits(el) {
   req.send();
 }
 
-function showRepositories() {
+function displayRepositories() {
   var repos = JSON.parse(this.responseText);
   var user = repos[0].owner.login;
   const repoList = `<ul>${repos
@@ -72,7 +73,7 @@ function showRepositories() {
 function getRepositories() {
   const username = document.getElementById("username").value;
   const req = new XMLHttpRequest();
-  req.addEventListener('load', showRepositories);
+  req.addEventListener('load', displayRepositories);
   req.open('GET', `https://api.github.com/users/${username}/repos`);
   req.send();
 }
