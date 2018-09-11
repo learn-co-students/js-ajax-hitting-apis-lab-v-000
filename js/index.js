@@ -50,6 +50,7 @@ function getCommits(el) {
 function displayRepositories() {
   var repos = JSON.parse(this.responseText);
   var user = repos[0].owner.login;
+  // change data-user data -repo to by data url
   const repoList = `<ul>${repos
     .map(
        r =>
