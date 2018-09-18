@@ -8,14 +8,14 @@ function getRepositories() {
 
 function displayRepositories() {
   var repos = JSON.parse(this.responseText);
-  let repoList = `<ul>${repos.map(r => '<li>' + r.name + ` - <a href="${r.html_url}">${r.html_url}</a>` + ' - <a href="#" data-repo="' +  r.name +'" onclick="getCommits(this)">Get Commits</a> '+ ' - <a href="#" data-repo="' +  r.name +'" onclick="getBranches(this)">Get Branches</a>' + '</li>').join('')}</ul>`;
+  let repoList = `<ul>${repos.map(r => '<li>' + r.name + ` - <a href="${r.html_url}">${r.html_url}</a>` + ' - <a href="#" data-repository="' +  r.name +'" onclick="getCommits(this)">Get Commits</a> '+ ' - <a href="#" data-repository="' +  r.name +'" onclick="getBranches(this)">Get Branches</a>' + '</li>').join('')}</ul>`;
   document.getElementById('repositories').innerHTML = repoList;
 }
 
 
 function getCommits(el) {
   let username = document.getElementById('username').value
-  let name = el.dataset.repo; 
+  let name = el.dataset.repository; 
   let req = new XMLHttpRequest();
   req.addEventListener('load', displayCommits);
   console.log(`https://api.github.com/repos/${username}/` + name + '/commits')
@@ -31,7 +31,7 @@ function displayCommits() {
 
 function getBranches(el) {
   let username = document.getElementById('username').value
-  let name = el.dataset.repo; 
+  let name = el.dataset.repository; 
   let req = new XMLHttpRequest();
   req.addEventListener('load', displayBranches);
   req.open('GET', `https://api.github.com/repos/${username}/` + name + '/branches')
