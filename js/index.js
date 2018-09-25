@@ -46,7 +46,7 @@ function displayRepositories(){
     .map(r =>
         '<li>' +
         r.name + ' - '+
-        r.html_url +
+        `<a href=${r.html_url}>${r.html_url}</a>` +
         ' - <a href="#" data-repository="' + r.name +'" data-username="' + r.owner.login +'" onclick="getCommits(this)">Get Commits</a>' +
         ' - <a href="#" data-repository="' + r.name +'" data-username="' + r.owner.login +'" onclick="getBranches(this)">Get Branches</a>' +
         '</li>')
