@@ -24,10 +24,12 @@
 
   <body>
     <main id="main">
-      <form onsubmit="getRepositories();return false;">
-        <input type="text" id="username"><br>
-        <input type="submit">
-      </form>
+      <div id="repoUserForm">
+        <form onSubmit="getRepositories();return false;">
+            Username: <input type="text" id="username" value="">
+            <input type="submit">
+        </form>
+      </div>
     </main>
     <div class="flexbox-container">
       <div>
