@@ -16,7 +16,7 @@ function getBranches(el){
 
 function displayCommits(){
   const commits = JSON.parse(this.responseText)
-  const commitsList = `<ul>${commits.map(commit => `<li>/${commit.commit.author.name}/ <br> /${commit.commit.message}/</li>`).join('')}</ul>`
+  const commitsList = `<ul>${commits.map(commit => `<li>/${commit.author.login}/ <br> /${commit.commit.message}/</li>`).join('')}</ul>`
 
   document.getElementById('details').innerHTML = commitsList
 }
