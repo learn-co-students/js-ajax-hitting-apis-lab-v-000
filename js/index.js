@@ -7,10 +7,11 @@ function displayBranches(){
 }
 
 function getBranches(el){
-  const fullName = el.dataset.repo
+  const owner = el.dataset.username
+  const repo = el.dataset.repository
   const req = new XMLHttpRequest()
   req.addEventListener('load', displayBranches)
-  req.open('GET',`https://api.github.com/repos/${fullName}/branches` )
+  req.open('GET',`https://api.github.com/repos/${owner}/${repo}/branches` )
   req.send()
 }
 
@@ -33,7 +34,7 @@ function getCommits(el){
 
 function displayRepositories(){
   const repos = JSON.parse(this.responseText)
-  const repoList = `<ul>${repos.map(r => `<li>/${r.name}/ /${r.owner.login}/ /${r.html_url}/ <br> <a href="#" data-repo="${r.full_name}" onclick="getCommits(this)">Get Commits</a> <br>
+  const repoList = `<ul>${repos.map(r => `<li>/${r.name}/ /${r.owner.login}/ /${r.html_url}/ <br> <a href="#" data-repository="${r.name}" data-username="${r.owner.login}" onclick="getCommits(this)">Get Commits</a> <br>
     <a href="#" data-repository="${r.name}" data-username="${r.owner.login}" onclick="getBranches(this)">Get Branches</a></li>`).join('')}</ul>`
 
   document.getElementById('repositories').innerHTML = repoList
