@@ -28,7 +28,6 @@ function getCommits(el) {
   req.send();
 }
 
-
 function displayCommits() {
   let commits = JSON.parse(this.responseText);
   let commitList = `<ul>${commits.map(commit => {
@@ -40,7 +39,6 @@ function displayCommits() {
 }
 
 function getBranches(el) {
-  console.log(el);
   const repoName = el.dataset.repository;
   const userName = el.dataset.username;
   const req = new XMLHttpRequest();
