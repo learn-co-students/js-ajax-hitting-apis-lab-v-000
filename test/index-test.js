@@ -46,7 +46,7 @@ describe('index', () => {
     let el
 
     before(() => {
-      el = { dataset: { repository: 'Spoon-Knife', username: 'octocat' } }
+      el = { dataset: { repository: 'test-repo', username: 'octocat' } }
       xhr = sinon.useFakeXMLHttpRequest()
       window.XMLHttpRequest = xhr
 
