@@ -17,20 +17,18 @@ function displayRepositories() {
     r.name +
     '</a>' + 
     ' | ' +
-    '<a href="#" data-repo="' +
+    '<a href="#" data-repository="' +
     r.name +
     '" onclick="getCommits(this)">Get Commits</a>' +
     ' | ' +
-    '<a href="#" data-repo="' + 
+    '<a href="#" data-repository="' + 
     r.name +
     '" onclick="getBranches(this)">Get Branches</a>' + 
     '</li><br>').join('')}</ul>`;
   document.getElementById('repositories').innerHTML = repoList;
 }
 
-function getCommits(el) {
-  console.log(el.dataset.repo);
-  
+function getCommits(el) {  
   const name = el.dataset.repository;
   const req = new XMLHttpRequest();
   req.addEventListener('load', displayCommits);
@@ -55,7 +53,7 @@ function displayCommits() {
 }
 
 function getBranches(el) {
-  const name = el.dataset.repo;
+  const name = el.dataset.repository;
   const req = new XMLHttpRequest();
   req.addEventListener('load', displayBranches);
   req.open('GET', `https://api.github.com/repos/${username.value}/${name}/branches`);
