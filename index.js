@@ -32,7 +32,7 @@ function displayRepositories() {
 		<a href="https://github.com/${repo.owner.login}/${repo.name}">showRepo</a><br>
 		Commits: <a href="#" data-repository="${repo.name}" data-username="${repo.owner.login}" onclick="getCommits(this)">
 		Get Commits</a><br>
-		Branches: <a href="#" data-repository="${repo.name}" data-username="${repo.owner.login}" onclick="getBranches()">Get Branches</a></li><br>`
+		Branches: <a href="#" data-repository="${repo.name}" data-username="${repo.owner.login}" onclick="getBranches(this)">Get Branches</a></li><br>`
 		reposHTML += repoLink
 	}
 	reposHTML += '</ul>'
