@@ -9,6 +9,7 @@
         display: -ms-flex;
         display: -webkit-flex;
         display: flex;
+        flex-wrap: wrap;
       }
 
       .flexbox-container>div {
@@ -23,20 +24,31 @@
   </head>
 
   <body>
-    <main id="main">
-      <form onsubmit="getRepositories();return false;">
-        <input type="text" id="username"><br>
-        <input type="submit">
-      </form>
-    </main>
+    
+    <!-- 
+      it('has a form', () => {
+      var form = document.getElementsByTagName("form")[0]
+      expect(form).toExist()
+      expect(form).toMatch(/getRepositories()/)
+      expect(document.getElementById("username")).toExist()
+    })
+  })
+    -->
     <div class="flexbox-container">
+      <div >
+         <form onsubmit="getRepositories();return false;">
+            <input id="username" name="username" placeholder="Github Username. Ex. octocat" size="30"> 
+            <input type="submit" value="Submit"> 
+          </form>
+      </div>
       <div>
         <h3>Repositories</h3>
         <div id="repositories"></div>
       </div>
       <div>
         <h3>Details</h3>
-        <div id="details"></div>
+        <div id="details">
+        </div>
       </div>
     </div>
     <script src="js/index.js"></script>
