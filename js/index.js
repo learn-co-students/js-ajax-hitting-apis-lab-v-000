@@ -18,9 +18,11 @@ function displayRepositories() {
     .map(
       r =>
       '<li><a href="' + r.html_url + '">' + r.name +
-  '</a> - <a href="#" data-repository="' + r.name + '" data-username="' + r.owner.login +
+  '</a> - <a href="#" data-repository="' + r.name +
+  '" data-username="' + r.owner.login +
   '" onclick="getCommits(this)">Get Commits</a> | <a href="#" data-repository="' + r.name +
-  '" data-username="' + r.owner.login + '" onclick="getBranches(this)">Get Branches</a> </li>').join('')}</ul>`
+  '" data-username="' + r.owner.login +
+  '" onclick="getBranches(this)">Get Branches</a> </li>').join('')}</ul>`
     document.getElementById("repositories").innerHTML = repoList
 }
 
@@ -67,6 +69,12 @@ function getBranches(el) {
 
 function displayBranches() {
 const branches = JSON.parse(this.responseText);
-const branchList = `<ul>${branches.map(branch => '<li>' + branch.name +'</li>').join('')}</ul>`;
+const branchList = `<ul>${branches
+  .map(
+    branch =>
+    '<li>' +
+    branch.name +
+    '</li>')
+    .join('')}</ul>`;
 document.getElementById('details').innerHTML = branchList;
 }
