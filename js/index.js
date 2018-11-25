@@ -88,7 +88,8 @@ function getBranches(ele) {
 function displayBranches(ele) {
   const branches = JSON.parse(this.responseText);
 // list of names of each branch of the repository
-
+console.log(branches[0])
+  // const branchLists = `<ul>${branches.map(branch => '<li>' + branch.name + '</li>').join('')}</ul>`;
   const branchLists = `<ul>${branches.map(branch => '<li>' + branch.name + '</li>').join('')}</ul>`;
 
   const details = document.getElementById('details');
