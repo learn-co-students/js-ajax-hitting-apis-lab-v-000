@@ -9,9 +9,11 @@ function getRepositories() {
 function displayRepositories() {
   let repos = JSON.parse(this.responseText)
   console.log(repos)
-  const repoList = `<ul>${repos.map(r => '<li>' + r.name + ` - <a href="${r.url}">`+ r.url + '</a>' + '<br>' + `<a href="#" data-username="${r.owner.login}" data-repository="${r.name}" onclick="getCommits(this)">Get Commits</a>` + '</li>' + '<br>').join('')}</ul>`
+  const repoList = `<ul>${repos.map(r => '<li>' + r.name + ` - <a href="${r.html_url}">`+ r.html_url + '</a>' + '<br>').join('')}</ul>`
   document.getElementById('repositories').innerHTML = repoList
 }
+// /https:\/\/github.com\/octocat\/Hello-World/
+// + `<a href="#" data-username="${r.owner.login}" data-repository="${r.name}" onclick="getCommits(this)">Get Commits</a>` + '</li>' + '<br>')
 
 function getCommits(el) {
   let repoName = el.dataset.repository
@@ -29,5 +31,3 @@ function displayCommits() {
   console.log(commitsList)
   document.getElementById('details').innerHTML = commitsList
 }
-
-// , commit.commit.author.email, commit.commit.message}
