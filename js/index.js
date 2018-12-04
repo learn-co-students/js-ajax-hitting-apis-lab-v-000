@@ -18,7 +18,8 @@ function displayRepositories() {
       r =>
 
         '<li><a href=' + r.html_url + '>' + r.name + '</a> ' +
-        '<a href="#" data-repo="' + r.name + '" onclick="getCommits(this)">Get Commits</a></li>'
+        '<a href="#" data-repo="' + r.name + '" onclick="getCommits(this)">Get Commits</a>' +
+        ' <a href="#" data-repo="' + r.name + '" onclick="getBranches(this)">Get Branches</a></li>'
 
     )
     .join('')}</ul>`;
@@ -48,4 +49,28 @@ function displayCommits() {
     )
     .join('')}</ul>`;
   document.getElementById('details').innerHTML = commitsList;
+}
+
+function getBranches (el) {
+  //debugger
+  const username = document.getElementById('username').value;
+  const name = el.dataset.repository;
+  const req = new XMLHttpRequest();
+  req.addEventListener('load', displayBranches);
+  // replace octocat with name
+  //GET /repos/:owner/:repo/branches
+  req.open('GET', 'https://api.github.com/repos/' + username + '/' + name + '/branches');
+  req.send();
+}
+
+function displayBranches () {
+  //debugger
+  const branches = JSON.parse(this.responseText);
+  const branchesList = `<ul>${branches
+    .map(
+      branch =>
+        '<li><strong>' + branch.name + '</strong></li>'
+    )
+    .join('')}</ul>`;
+  document.getElementById('details').innerHTML = branchesList;
 }
