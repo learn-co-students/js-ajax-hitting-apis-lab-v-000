@@ -25,15 +25,15 @@ function displayRepositories() {
   const repoList = `<ul>${repos
     .map(
       r =>
-        '<li>' +
-        r.html_url +
-        ' - <a href="#" data-repo="' +
-        r.name +
-        '" onclick="getCommits(this)">Get Commits</a></li>'
-    )
-    //    '<li>' +
-    //    r.html_url +
-    //    '<a href= onclick="getCommits(this) ">Get Commits</a></li>'
+    //     '<li>' +
+    //     r.html_url +
+    //     ' - <a href="#" data-repo="' +
+    //     r.name +
+    //     '" onclick="getCommits(this)">Get Commits</a></li>'
+    // )
+       '<li>' +
+       r.html_url +
+       '<a href= onclick="getCommits(this) ">Get Commits</a></li>'
     )
     .join('')}</ul>`;
   document.getElementById('repositories').innerHTML = repoList;
