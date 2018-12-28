@@ -12,8 +12,9 @@ function displayRepositories() {
 	let username = document.getElementById('username').value;
 	const repoList = `<ul>${repos.map(
 		r => '<li>' + r.name + 
-		'<br><a href="#" data-username="'+ r.owner.login +'"data-repository="' + r.name +'"onclick="getCommits(this)">GetCommits</a>' +
 		'<br>https://github.com/'+ r.owner.login + '/' + r.name +
+		'<br><a href="#" data-username="'+ r.owner.login +'"data-repository="' + r.name +'"onclick="getCommits(this)">GetCommits</a>' +
+
 		'<br><a href="#" data-username="'+ r.owner.login +'"data-repository="' + r.name +'"onclick="getBranches(this)">GetBranches</a></li>'
 		).join('')}</ul>`;
 	document.getElementById('repositories').innerHTML = repoList;
