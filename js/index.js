@@ -31,7 +31,6 @@ function getCommits(rp) {
   const user = rp.dataset.user
   const req = new XMLHttpRequest;
   const html = 'https://api.github.com/repos/' + user + '/' + repo + '/commits'
-  // debugger;
   req.addEventListener('load', displayCommits)
   req.open('GET', html)
   req.send()
