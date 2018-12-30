@@ -35,7 +35,7 @@ function getCommits(rp) {
   req.addEventListener('load', displayCommits)
   req.open('GET', html)
   req.send()
-  console.log('https://api.github.com/repos/' + user + '/' + repo + '/commits');
+  console.log(html);
   
 }
 
