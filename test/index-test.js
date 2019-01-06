@@ -11,7 +11,7 @@ describe('index', () => {
   describe('callback functions', () => {
     describe('displayCommits', () => {
       it('parses and displays json values', () => {
-        var resp = { responseText: commitsData() }
+        var resp = { responseText: commitsData(), readyState: 4, status: 200 }
         displayCommits.call(resp)
         el = document.getElementById("details")
         expect(el.innerHTML).toMatch(/Monalisa Octocat/)
@@ -46,7 +46,7 @@ describe('index', () => {
     let el
 
     before(() => {
-      el = { dataset: { repository: 'Spoon-Knife', username: 'octocat' } }
+      el = { dataset: { repository: 'Spoon-Knife', username: 'octocat', commitpath: "https://api.github.com/repos/octocat/Spoon-Knife/commits{/sha}"  } }
       xhr = sinon.useFakeXMLHttpRequest()
       window.XMLHttpRequest = xhr
 
@@ -69,7 +69,7 @@ describe('index', () => {
         document.getElementById("username").value = 'octocat'
         getRepositories()
         expect(requests.length).toBe(1)
-        expect(requests[0].url).toBe('https://api.github.com/users/octocat/repos')
+        expect(requests[0].url).toMatch(/https:\/\/api.github.com\/users\/octocat\/repos/)
       })
     })
 
@@ -77,7 +77,7 @@ describe('index', () => {
       it('calls out to Github', () => {
         getCommits(el)
         expect(requests.length).toBe(1)
-        expect(requests[0].url).toBe('https://api.github.com/repos/octocat/Spoon-Knife/commits')
+        expect(requests[0].url).toMatch(/https:\/\/api.github.com\/repos\/octocat\/Spoon-Knife\/commits/)
       })
     })
 
@@ -91,6 +91,10 @@ describe('index', () => {
 
   })
 })
+
+function commitsResponse(){
+  return {responseText: commitsData().toString(), readyState: 4, status: 200}
+}
 
 function commitsData() {
   const commits = [
