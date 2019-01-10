@@ -9,7 +9,7 @@ function getRepositories() {
 
 function displayRepositories() {
   var repos = JSON.parse(this.responseText)
-  console.log(repos)
+  // console.log(repos)
   const repoList = `<ul>${repos.map(
     r => '<li>' +
     r.name +
@@ -27,8 +27,24 @@ function displayRepositories() {
 }
 
 function getCommits(el) {
-  const name = el.dataset.repo
-  const username = document.getElementById('username').value
+  const name = el.dataset.repository
+  const username = el.dataset.username
   const req = new XMLHttpRequest()
   req.addEventListener('load', displayCommits)
+  req.open('GET', 'https://api.github.com/repos/' + username + '/' + name + '/commits')
+}
+
+function displayCommits() {
+  const commits = JSON.parse(this.responseText)
+  console.log(commits)
+  const commitList = `<ul>${commits.map(
+    c => '<li>' +
+    c.commit.committer.name +
+    ' - ' +
+    c.committer.login +
+    ' - ' +
+    c.commit.message +
+    '</li>'
+  ).join('')}</ul>`
+  document.getElementById('details').innerHTML = commitList
 }
