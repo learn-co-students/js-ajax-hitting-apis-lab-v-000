@@ -1,19 +1,19 @@
 function getRepositories(){
 	const req = new XMLHttpRequest();
 	const nameValue = document.getElementById("username").value;
-	req.addEventListener('load', showRepositories);
+	req.addEventListener('load', displayRepositories);
 	req.open('GET', `https://api.github.com/users/${nameValue}/repos`);
 	req.send();
 }
 
-function showRepositories(){
+function displayRepositories(){
 	var repos = JSON.parse(this.responseText);
 	console.log(repos);
 	const repoList = repos.map( r =>
         `<li><a href="${r.html_url}" target="_blank">${r.name}</a></li>
         	<ul>
-        	<li><a href="#" data-username="${r.owner.login}" data-repo="${r.name}" onclick="getCommits(this)">Get Commits</a></li>
-	    	<li><a href="#" data-username="${r.owner.login}" data-repo="${r.name} onclick="getBranches(this)">Get Branches</a></li>
+        	<li><a href="#" data-username="${r.owner.login}" data-repository="${r.name}" onclick="getCommits(this)">Get Commits</a></li>
+	    	<li><a href="#" data-username="${r.owner.login}" data-repository="${r.name}" onclick="getBranches(this)">Get Branches</a></li>
 	    	</ul>`
 	    ).join('');
 	const returnHtml = '<ul>' + repoList + '</ul>'
@@ -22,7 +22,7 @@ function showRepositories(){
 
 
 function getCommits(el){
-  const repoName = el.dataset.repo;
+  const repoName = el.dataset.repository;
   const user = el.dataset.username;
   const req = new XMLHttpRequest();
   req.addEventListener('load', displayCommits);
@@ -44,8 +44,7 @@ function displayCommits(){
 }
 
 function getBranches(el){
-debugger
-  const repoName = el.dataset.repo;
+  const repoName = el.dataset.repository;
   const user = el.dataset.username;
   const req = new XMLHttpRequest();
   req.addEventListener('load', displayBranches);
@@ -54,8 +53,10 @@ debugger
 }
 
 function displayBranches(){
-	debugger
 	const branches = JSON.parse(this.responseText);
-	console.log(this.responseText)
+	const branchesList = `<ul>${branches.map(branch =>
+		'<li>' + branch.name + '</li>')
+		.join('')}</ul>`;
+	document.getElementById('details').innerHTML += branchesList
 }
 
