@@ -7,7 +7,7 @@ describe('index', () => {
       expect(document.getElementById("username")).toExist()
     })
   })
-
+  
   describe('callback functions', () => {
     describe('displayCommits', () => {
       it('parses and displays json values', () => {
