@@ -8,15 +8,19 @@ function getRepositories() {
   req.send();
 }
 
+
 function showRepositories() {
   const repos = JSON.parse(this.responseText);
-  const repoList = `<ul>${repos.map(repo => '<li style="color: grey;"><a href="' + repo.html_url + '">' + repo.name + '</a> - <a href="#" data-commits-url="' + repo.commits_url + '" onlcick="getCommits();">Get Commits</a></li>').join('')}</ul>`;
-
+  const repoList = `<ul>${repos.map(repo => '<li style="color: grey;"><a href="' + repo.html_url + '">' + repo.name + '</a> - <a id="' + repo.name + '"href="#" data-username="' + repo.owner.login + '" data-repository="' + repo.name + '" onclick="getCommits(this);">Get Commits</a></li>').join('')}</ul>`;
+  
   document.getElementById('repositories').innerHTML = repoList;
 }
 
 
-function getCommits() {
+function getCommits(el) {
+  const name = el.dataset.username;
+  const repo = el.dataset.repository;
+  console.log(name + ' ' + repo);
 }
 
 function getBranches() {
