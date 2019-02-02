@@ -14,17 +14,21 @@ function getRepositories(){
 }
 
 function displayRepositories(){
-    // debugger
+    
           console.log(this.responseText);
            const repos = JSON.parse(this.responseText)
+           
           const repoList = repos.map(r => `<li><a href=${r.html_url}>${r.name}</a></li>`).join('')
         //    target what we need in those URL so it his clickable.
           document.getElementById('repositories').innerHTML = "<ul>" + repoList + "</ul>"
    }
   
 function getCommits(el){
-    const repoName = el.dataset.respository;
-    const uri = rootURL + '/repos/' + el.dataset.username + '/' + repoName + '/commits';
+    
+    const repoName = el.dataset.repository;
+    
+    const uri =
+    rootURL + '/repos/' + el.dataset.username + '/' + repoName + '/commits';
     // the formate stays the same, but it targets different things.
     const xhr = new XMLHttpRequest();
     xhr.addEventListener("load", displayCommits);
