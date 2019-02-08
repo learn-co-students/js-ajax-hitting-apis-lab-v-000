@@ -12,12 +12,12 @@ function displayRepositories() {
   const repoList = `<ul>${repos.map(r => '<li>' +
                                          r.name + '<br>' +
                                          `<a href="${r.html_url}">${r.html_url}</a><br>` +
-                                         '<a href="#" data-repo="' +
+                                         '<a href="#" data-repository="' +
                                          r.name +
                                          '" data-username="' +
                                          r.owner.login +
                                          '" onclick="getCommits(this)">Get Commits</a><br>' +
-                                         '<a href="#" data-repo="' +
+                                         '<a href="#" data-repository="' +
                                          r.name +
                                          '" data-username="' +
                                          r.owner.login +
@@ -27,7 +27,7 @@ function displayRepositories() {
 
 function getCommits(repoJsonRep) {
   const repoUsername = repoJsonRep.dataset.username;
-  const repoName = repoJsonRep.dataset.repo;
+  const repoName = repoJsonRep.dataset.repository;
   const req = new XMLHttpRequest();
   req.addEventListener('load', displayCommits);
   req.open('GET', `https://api.github.com/repos/${repoUsername}/${repoName}/commits`);
@@ -49,7 +49,7 @@ function displayCommits() {
 
 function getBranches(repoJsonRep) {
   const repoUsername = repoJsonRep.dataset.username;
-  const repoName = repoJsonRep.dataset.repo;
+  const repoName = repoJsonRep.dataset.repository;
   const req = new XMLHttpRequest();
   req.addEventListener('load', displayBranches);
   req.open('GET', `https://api.github.com/repos/${repoUsername}/${repoName}/branches`);
