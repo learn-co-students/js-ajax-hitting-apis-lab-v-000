@@ -34,24 +34,24 @@ function displayRepositories() {
 
 function getCommits(el) {
     
-    let username = document.getElementById('username').value;
-    let repoName = el.dataset.username;
-    const req = new XMLHttpRequest();
-    req.addEventListener('load', displayCommits);
-    req.open('GET', `https://api.github.com/repos/${username}/` + repoName + '/commits');
-    req.send();
+    // let username = document.getElementById('username').value;
+    // let repoName = el.dataset.username;
+    // const req = new XMLHttpRequest();
+    // req.addEventListener('load', displayCommits);
+    // req.open('GET', `https://api.github.com/repos/${username}/` + repoName + '/commits');
+    // req.send();
 
 }
 
 function displayCommits() {
-    const commits = JSON.parse(this.responseText);
-    console.log(commits);
+//     const commits = JSON.parse(this.responseText);
+//     console.log(commits);
 
-    const commitsList = commits.map(c =>
-        c.html_url)
-    console.log(commitsList)
-    debugger
-}
+//     const commitsList = commits.map(c =>
+//         c.html_url)
+//     console.log(commitsList)
+//     debugger
+// }
 
 function getBranches() {
 
