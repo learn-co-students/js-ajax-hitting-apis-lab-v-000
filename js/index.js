@@ -1,4 +1,6 @@
 // your code here
+const rootURL = 'https://api.github.com';
+
 function getRepositories() {
     let username = document.getElementById('username').value;
 
@@ -34,29 +36,47 @@ function displayRepositories() {
 
 function getCommits(el) {
     
-    // let username = document.getElementById('username').value;
-    // let repoName = el.dataset.username;
-    // const req = new XMLHttpRequest();
-    // req.addEventListener('load', displayCommits);
-    // req.open('GET', `https://api.github.com/repos/${username}/` + repoName + '/commits');
-    // req.send();
-
+    let username = document.getElementById('username').value;
+    const repoName = el.dataset.repository;
+    const uri = 
+        rootURL + '/repos/' + el.dataset.username + '/' + repoName + '/commits';
+    const req = new XMLHttpRequest();
+    req.addEventListener('load', displayCommits);
+    req.open('GET', uri);
+    req.send();
 }
 
 function displayCommits() {
-//     const commits = JSON.parse(this.responseText);
-//     console.log(commits);
-
-//     const commitsList = commits.map(c =>
-//         c.html_url)
-//     console.log(commitsList)
-//     debugger
-// }
-
-function getBranches() {
-
+    const commits = JSON.parse(this.responseText);
+    const commitsList = 
+        `<ul>${
+            commits.map(
+                commit => 
+                '<li><h3>' +
+                commit.commit.author.name +
+                ' (' +
+                commit.author.login +
+                ')</h3>' +
+                commit.commit.message +
+                '</li>'
+            )
+            .join('')
+        }</ul>`;
+    document.getElementById('details').innerHTML = commitsList;
 }
 
-function displayBranches(){
+function getBranches(el) {
+  const repoName = el.dataset.repository;
+  const uri =
+    rootURL + '/repos/' + el.dataset.username + '/' + repoName + '/branches';
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener('load', displayBranches);
+  xhr.open('GET', uri);
+  xhr.send();
+}
 
+function displayBranches() {
+    const branches = JSON.parse(this.responseText);
+    const branchesList = `<ul>${branches.map(branch => '<li>' + branch.name + '</li>').join('')}</ul>`;
+    document.getElementById('details').innerHTML = branchesList;
 }
