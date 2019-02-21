@@ -17,15 +17,15 @@ function displayRepositories(){
   .map(
     r => {
         const username = 'data-username=" ' + r.owner.login + '"';
-        const reponame = 'data-reponame="' + r.name + '"';
+        const repository = 'data-repository="' + r.name + '"';
 
         return `
         <li>
 
         <h2>${r.name}</h2>
         <a href = "${r.html_url}"><${r.html_url}</a>
-        <a href="#" ${reponame} ${username} onclick="getCommits(this)">Get Commits</a><br>
-        <a href="#" ${reponame} ${username} onclick="getBranches(this)">Get Branches</a></li>
+        <a href="#" ${repository} ${username} onclick="getCommits(this)">Get Commits</a><br>
+        <a href="#" ${repository} ${username} onclick="getBranches(this)">Get Branches</a></li>
       </li>`;
     })
   .join('') + "</ul>";
@@ -34,8 +34,8 @@ document.getElementById('repositories').innerHTML = repoList;
 
 function getCommits(el) {
 
-  const name = el.dataset.reponame;
-debugger
+  const name = el.dataset.repository;
+  debugger
   let username = document.getElementById('username').value
 
   const req = new XMLHttpRequest();
@@ -63,7 +63,7 @@ function displayCommits(){
 }
 
 function getBranches(el){
-  const name = el.dataset.reponame;
+  const name = el.dataset.repository;
   let username = document.getElementById('username').value
 
   const req = new XMLHttpRequest();
