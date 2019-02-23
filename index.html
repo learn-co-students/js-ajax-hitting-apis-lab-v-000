@@ -55,4 +55,15 @@
     <script src="test/index-test.js"></script>
   </body>
 
+<script id="repository-template" type="text/x-handlebars-template">
+  <ul>
+    {{#each this}}
+      <li>
+        <a href="{{html_url}}">{{name}}</a>
+      </li>
+    {{/each}}
+  </ul>
+</script>
+
+
 </html>

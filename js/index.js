@@ -33,8 +33,11 @@ function displayBranches() {
 
 function displayRepositories() {
   let repos = JSON.parse(this.responseText);
-  console.log(repos);
-  let repoList = `<ul>${repos.map(r => "<li>" + r.name + "<a href="${r.html_url}">" + "</li>").join(" ")}</ul>`;
+  let repoTemplate = Handlebars.compile(document.getElementById("repository-template").innerHTML);
+  let result = repoTemplate(repos);
+  document.getElementById("repositories").innerHTML += result;
 
-  document.getElementById('repositories').innerHTML = repoList;
+  //let repoList = `<ul>${repos.map(r => "<li>" + r.name + "<a href="${r.html_url}">" + "</li>").join(" ")}</ul>`;
+
+  //document.getElementById('repositories').innerHTML = repoList;
 }
