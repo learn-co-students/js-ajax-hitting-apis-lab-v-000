@@ -30,5 +30,8 @@
     "mocha-jsdom": "~1.1.0",
     "mocha-multi": "^0.9.1",
     "sinon": "^1.17.7"
+  },
+  "dependencies": {
+    "handlebars": "^4.1.0"
   }
 }
