@@ -27,7 +27,6 @@ function getBranches(el) {
 
 function displayRepositories() {
   const repos = JSON.parse(this.responseText);
-  console.log(repos);
   const repoList = `<ul>${repos.
     map(r => '<a href="' + r.html_url +'"><li>' + r.name + '</li></a></li>' +
     ' - ' + '<a href="#" data-username="' + r.owner.login + '" data-repository="' + r.name +
@@ -40,7 +39,6 @@ function displayRepositories() {
 
 function displayCommits() {
   const commits = JSON.parse(this.responseText);
-  console.log(commits);
   const commitsList = `<ul>${commits
     .map(
       commit =>
