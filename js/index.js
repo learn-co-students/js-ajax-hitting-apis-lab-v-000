@@ -62,19 +62,19 @@ function displayBranches() {
     .map(
       branch =>
         '<li>' +
-        branch.name + branch.message +
+        branch.name +
         '</li>'
     )
     .join('')
   }</ul>`;
   document.getElementById('details').innerHTML = branchesList;
-}
+} 
 
 function getBranches(el) {
   const name = el.dataset.repository;
   const username = el.dataset.username;
   const req = new XMLHttpRequest();
-  req.addEventListener('lead', displayBranches);
+  req.addEventListener('load', displayBranches);
   req.open('GET', 'https://api.github.com/repos/' + username + '/' + name + '/branches');
   req.send();
 }
