@@ -2,6 +2,9 @@
 <html>
 
   <head>
+    <style>
+    body {background-color: powderblue;}
+    </style>
     <title>JavaScript GitHub API with XHR</title>
     <link rel="stylesheet" type="text/css" href="node_modules/mocha/mocha.css">
     <style>
@@ -24,9 +27,9 @@
 
   <body>
     <main id="main">
-      <form onsubmit="getRepositories();return false;">
-        <input type="text" id="username"><br>
-        <input type="submit">
+      <form  onsubmit="getRepositories(); return false;" >
+        Username: <input type="text" id="username"><br>
+        <input type="submit" value="Submit">
       </form>
     </main>
     <div class="flexbox-container">
