@@ -29,15 +29,14 @@ function getCommits(el){
 
 function displayCommits() {
 	let commits = JSON.parse(this.responseText)
-	debugger;
     const commitsList =  `<ul>${commits
-    	.map(c => '<li>' + `${c.commit.author.name}` +  `${c.commit.author.login}` + `${c.commit.message}` + '</li>').join('')}</ul>`;
+    	.map(c => '<li>' + `${c.commit.author.name}` +  `${c.author.login}` + `${c.commit.message}` + '</li>').join('')}</ul>`;
     	
   	document.getElementById('details').innerHTML = commitsList;
 }
 
 function getBranches(el) {
-	let uri = `https://api.github.com/repos/${el.dataset.user_name}/${el.dataset.repository}/branches`
+	let uri = `https://api.github.com/repos/${el.dataset.username}/${el.dataset.repository}/branches`
 	let req  = new XMLHttpRequest()
 	req.addEventListener('load', displayBranches);
 	req.open ('GET', uri); 
