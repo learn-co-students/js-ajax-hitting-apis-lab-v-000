@@ -1,5 +1,14 @@
 const rootURL = 'https://api.github.com';
 
+function getRepositories() {
+  const name = document.getElementById('username').value;
+  const uri = rootURL + '/users/' + name + '/repos';
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener('load', displayRepositories);
+  xhr.open('GET', uri);
+  xhr.send();
+  return false;
+}
 function displayRepositories() {
   const repos = JSON.parse(this.responseText);
   const repoList =
@@ -20,16 +29,15 @@ function displayRepositories() {
     '</ul>';
   document.getElementById('repositories').innerHTML = repoList;
 }
-
 function getCommits(el) {
-  const name = el.dataset.repo;
-  const uri = rootURL + '/repos/' + el.dataset.username + '/' + repoName + '/commits';
-  const req = new XMLHttpRequest();
-  req.addEventListener('load', displayCommits);
-  req.open('GET', uri);
-  req.send();
+  const repoName = el.dataset.repository;
+  const uri =
+    rootURL + '/repos/' + el.dataset.username + '/' + repoName + '/commits';
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener('load', displayCommits);
+  xhr.open('GET', uri);
+  xhr.send();
 }
-
 function displayCommits() {
   const commits = JSON.parse(this.responseText);
   const commitsList = `<ul>${commits
@@ -46,33 +54,19 @@ function displayCommits() {
     .join('')}</ul>`;
   document.getElementById('details').innerHTML = commitsList;
 }
-
-function getBranches(el){
+function getBranches(el) {
   const repoName = el.dataset.repository;
-  const uri = rootURL + '/repos/' + el.dataset.username + '/' + repoName + '/branches';
-  const req = new XMLHttpRequest();
-  req.addEventListener('load', displayBranches);
-  req.open('GET', uri);
-  req.send();
+  const uri =
+    rootURL + '/repos/' + el.dataset.username + '/' + repoName + '/branches';
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener('load', displayBranches);
+  xhr.open('GET', uri);
+  xhr.send();
 }
-function displayBranches(){
+function displayBranches() {
   const branches = JSON.parse(this.responseText);
   const branchesList = `<ul>${branches
-    .map(
-      (branch =>
-        '<li>' +
-        branch.name +
-        '</li>')
-    )
+    .map(branch => '<li>' + branch.name + '</li>')
     .join('')}</ul>`;
-    document.getElementById('details').innerHTML = branchesList;
-}
-function getRepositories() {
-  const name = document.getElementById("username").value;
-  const uri = rootURL + '/users/'+ name +/'repos';
-  const req = new XMLHttpRequest();
-  req.addEventListener('load', displayRepositories);
-  req.open('GET', uri);
-  req.send();
-  return false;
+  document.getElementById('details').innerHTML = branchesList;
 }
