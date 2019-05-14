@@ -4,9 +4,9 @@ function retrieveGithubUsername(){
 
 function displayRepositories() {
   var repos = JSON.parse(this.responseText);
-  console.log(repos)
+  // console.log(repos)
   let repoList = `<ul>${repos
-    .map(r =>'<b>' + r.name + '</b>' + '<br>' + '<li>' + r.html_url + '</li>' + '<br>' + `<a onsubmit="getCommits();return false;" href=${r.commits_url}>Commits<a>`)
+    .map(r =>'<b>' + r.name + '</b>' + '<br>' + '<li>' + r.html_url + '</li>' + `<a onclick="getCommits(this);" href='#'>Commits<a>` + '<br><br>')
     .join('')} </ul>`;
   document.getElementById('repositories').innerHTML = repoList;
 }
@@ -19,7 +19,10 @@ function getRepositories() {
   req.send();
 }
 
-function getCommits() {
+function getCommits(event) {
+  console.log(this)
+  // return event
+  // http://api.github.com/repos/octocat/Hello-World/commits
   // const usernameInput = retrieveGithubUsername()
   // const req = new XMLHttpRequest();
   // req.addEventListener('load', displayRepositories);
