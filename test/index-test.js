@@ -16,6 +16,7 @@ describe('index', () => {
         el = document.getElementById("details")
         expect(el.innerHTML).toMatch(/Monalisa Octocat/)
         expect(el.innerHTML).toMatch(/octocat/)
+        debugger
         expect(el.innerHTML).toMatch(/Fix all the bugs/)
       })
     })
