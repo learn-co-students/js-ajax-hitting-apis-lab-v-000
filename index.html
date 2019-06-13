@@ -4,6 +4,10 @@
     <title>JavaScript GitHub API with XHR</title>
     <link rel="stylesheet" type="text/css" href="node_modules/mocha/mocha.css">
     <style>
+      a{
+        text-decoration: none;
+        color: black;
+      }
        .flexbox-container {
          display: -ms-flex;
          display: -webkit-flex;
@@ -25,7 +29,13 @@
     </main>
     <div class="flexbox-container">
       <div>
-        <h3>Repositories</h3>
+        <h3>Repositories
+          <form onsubmit="getRepositories(); return false;">
+            <input type="text" id="username"><br>
+            <input type="submit">
+          </form>
+        </h3>
+
         <div id="repositories"></div>
       </div>
       <div>
