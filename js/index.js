@@ -1,4 +1,3 @@
-
 function getRepositories() {
 	let input = document.querySelector('input');
   const req = new XMLHttpRequest();
