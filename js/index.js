@@ -12,7 +12,9 @@ function displayCommits(){
 }
 
 function displayBranches() {
-
+  const branches = JSON.parse(this.responseText); //// NEED HELP HERE
+  const branchList = `<ul>${branches.map(branch => '<li>' + branch.name + '</li>').join('')}</ul>`;
+  document.getElementById('details').innerHTML = branchList;
 }
 
 function displayRepositories(){
@@ -38,6 +40,10 @@ function getCommits(el){
   req.send();
 }
 
-function getBranches(){
-
+function getBranches(el){
+  const name = el.dataset.repository; /// NEED HELP HERE
+  const req = new XMLHttpRequest();
+  req.addEventListener('load', displayBranches);
+  req.open('GET', 'https://api.github.com/repos/octocat/' + name + '/branches');
+  req.send();
 }
