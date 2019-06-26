@@ -1,13 +1,14 @@
 // your code here
 function getRepositories() {
     const name = document.getElementById("username").value
+    console.log(name)
     const req = new XMLHttpRequest();
     req.addEventListener('load', displayRepositories);
     req.open('GET', 'https://api.github.com/users/' + name + '/repos');
     req.send();
 }
 
- function displayRepositories() {
+function displayRepositories() {
     var repos = JSON.parse(this.responseText);
     console.log(repos);
     const repoList = `<ul>${repos
@@ -30,15 +31,17 @@ function getRepositories() {
           '" data-username="' +
           r.owner.login +
           ' onclick="getBranches(this)">Get Branches</a></li>'
-
       )
       .join('')}</ul>`;
+      console.log(repoList)
     document.getElementById('repositories').innerHTML = repoList;
 }
 
+
 function getCommits(el) {
-    debugger
-    const name = el.dataset.repo;
+    console.log(el.dataset)
+    const name = el.dataset.repository;
+    console.log(name);
     const username = el.dataset.username;
     const req = new XMLHttpRequest();
     req.addEventListener('load', displayCommits);
@@ -65,7 +68,7 @@ function displayCommits() {
 }
 
 function getBranches(el) {
-    const name = el.dataset.repo;
+    const name = el.dataset.repository;
     const username = el.dataset.username;
     const req = new XMLHttpRequest();
     req.addEventListener('load', displayBranches);
