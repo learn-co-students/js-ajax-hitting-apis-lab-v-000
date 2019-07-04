@@ -6,22 +6,6 @@ function getRepositories() {
     req.send();
 }
 
-function displayRepositories() {
-    const repos = JSON.parse(this.responseText);
-    const div = '<div>' + repos.map(repo => {
-        const dataUsername = "data-username='" + repo.owner.login + "'";
-        const dataRepoName = "data-repository='" + repo.name + "'";
-        return `
-          <div>
-            <h2>${repo.name}</h2>
-            <a href="${repo.html_url}">${repo.html_url}</a><br>
-            <a href="#" ${dataRepoName} ${dataUsername} onclick="getCommits(this)">Get Commits</a><br>
-            <a href="#" ${dataRepoName} ${dataUsername} onclick="getBranches(this)">Get Branches</a></li>
-          </div>`;
-    }).join('') +
-    '</div>';
-    document.getElementById('repositories').innerHTML = div;
-}
 
 function getCommits(element) {
     const repoName = element.dataset.repository;
@@ -51,19 +35,21 @@ function displayCommits() {
 }
 
 function displayRepositories() {
-    var repos = JSON.parse(this.responseText);
-    console.log(repos);
-    const repoList = `<ul>${repos
-      .map(
-        r =>
-          '<li>' +
-          r.name +
-          ' - <a href="#" data-repo="' +
-          r.name +
-          '" onclick="getCommits(this)">Get Commits</a></li>'
-      )
-      .join('')}</ul>`;
-    document.getElementById('repositories').innerHTML = repoList;
+  var repos = JSON.parse(this.responseText);
+  console.log(repos);
+  const repoList = `<ul>${repos
+    .map(
+      r =>
+        '<li> <a href="' + r.html_url + '">'+ r.name  + '</a>' + 
+        ' - <a href="#" data-repository="' +
+        r.name + '" data-username="' + r.owner.login  + '"' +
+        ' onclick="getCommits(this)">Get Commits</a>' + 
+        ' - <a href="#" data-repository="' +
+        r.name + '" data-username="' + r.owner.login  + '"' +
+        ' onclick="getBranches(this)">Get Branches</a></li>'
+    )
+    .join('')}</ul>`;
+  document.getElementById('repositories').innerHTML = repoList;
 }
 
 function getBranches(element) {
