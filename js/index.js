@@ -9,8 +9,8 @@ function displayRepositories() {
     .map(r =>
       '<li>' +
       r.name +
-      '- <a href="#"  data-repo="' +
-      r.html_url +
+      '- <a href="#"  data-repository="' +
+      r.full_name +
       `" onclick="getCommits(this)">${r.name}</a></li>`
     )
     .join('')}</ul>`;
@@ -28,11 +28,11 @@ function getRepositories() {
 }
 
 function getCommits(el) {
-  const name = el.dataset.repo;
+  let name = el.dataset.repository;
   console.log(name)
   const req = new XMLHttpRequest();
   req.addEventListener('load', displayCommits);
-  req.open('GET', `${name}` + '/commits');
+  req.open('GET', `https://api.github.com/repos/${name}/commits`);
   req.send();
 
 }
