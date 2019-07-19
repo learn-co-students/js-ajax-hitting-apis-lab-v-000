@@ -39,12 +39,12 @@ function displayRepositories() {
 // and repository to be used by the getCommits function.
 
 function getCommits(el) {
-  console.log(el)
   let username = document.querySelector('input').value;
   let repository = el.dataset.repository;
+  let url = `https://api.github.com/repos/${username}/${repository}/commits`
   const req = new XMLHttpRequest();
   req.addEventListener('load', displayCommits);
-  req.open('GET', `https://api.github.com/repos/${username}/${repository}/commits`);
+  req.open('GET', url);
   req.send();
 }
 
@@ -54,11 +54,11 @@ function displayCommits() {
     .map(
       commit =>
         '<li><strong>' +
-        (commit.commit.author.name || "Missing author name") +
+        commit.commit.author.name +
         '<li><strong>' +
-        (commit.author.login || "Missing author login") +
+        commit.author.login +
         '</strong> - ' +
-        (commit.commit.message || "Missing commit message") +
+        commit.commit.message +
         '</li>'
     )
     .join('')}</ul>`;
