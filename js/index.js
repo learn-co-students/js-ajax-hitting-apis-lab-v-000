@@ -22,6 +22,7 @@ function displayRepositories() {
         const username = `data-username=${r.owner.login}`
             return(  '<li>' +
               r.name +
+              ` <a href=${r.html_url}> go to repo </a>` +
               ` - <a href="#" ${username} data-repo="` +
               r.name +
               `" onclick="getCommits(this)">Get Commits</a>` +
@@ -59,8 +60,8 @@ function displayCommits() {
         '<li><strong>' +
         (commit.commit.author.name || "missing author name") +
         '<li><strong>' +
-  //      (commit.author.login || "missing author") +
-  //    '</strong> - ' +
+        (commit.author.login || "missing author") +
+      '</strong> - ' +
         commit.commit.message +
         '</li>'
     )
