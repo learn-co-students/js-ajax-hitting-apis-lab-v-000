@@ -22,10 +22,13 @@ function displayRepositories() {
         const username = `data-username=${r.owner.login}`
             return(  '<li>' +
               r.name +
-              ` <a href=${r.html_url}> go to repo </a>` +
               ` - <a href="#" ${username} data-repo="` +
               r.name +
-              `" onclick="getCommits(this)">Get Commits</a></li>`)}
+              `" onclick="getCommits(this)">Get Commits</a>` +
+                ` - <a href="#" ${username} data-repo= ` +
+                r.name +
+              `" onclick="getBranches(this)">Get Branches</a> </li>` )
+              }
 
     )
     .join('')}</ul>`;
@@ -40,7 +43,7 @@ function displayRepositories() {
 
 function getCommits(el) {
   let username = document.querySelector('input').value;
-  let repository = el.dataset.repository;
+  let repository = el.dataset.repo;
   let url = `https://api.github.com/repos/${username}/${repository}/commits`
   const req = new XMLHttpRequest();
   req.addEventListener('load', displayCommits);
@@ -54,10 +57,10 @@ function displayCommits() {
     .map(
       commit =>
         '<li><strong>' +
-        commit.commit.author.name +
+        (commit.commit.author.name || "missing author name") +
         '<li><strong>' +
-        commit.author.login +
-        '</strong> - ' +
+  //      (commit.author.login || "missing author") +
+  //    '</strong> - ' +
         commit.commit.message +
         '</li>'
     )
@@ -65,12 +68,29 @@ function displayCommits() {
   document.getElementById('details').innerHTML = commitsList;
 }
 
-function getBranches(){
-
+function getBranches(el){
+  let username = document.querySelector('input').value;
+  let repository = el.dataset.repo;
+  let branch = el.dataset.branch;
+  let url = `https://api.github.com/repos/${username}/${repository}/branches/${branch}`
+  const req = new XMLHttpRequest();
+  req.addEventListener('load', displayCommits);
+  req.open('GET', url);
+  req.send();
 }
+//    "branches_url": "http://api.github.com/repos/octocat/Hello-World/branches{/branch}",
 
 function displayBranches(){
-
+  const branches = JSON.parse(this.responseText);
+  const branchesList = `<ul>${branches
+    .map(
+      branch =>
+        '<li><strong>' +
+        branch.name  +
+        '</li>'
+    )
+    .join('')}</ul>`;
+  document.getElementById('branches').innerHTML = branchesList;
 }
 // Add a link to each repository that calls a getBranches function when clicked and,
 // when complete, calls a displayBranches function that fills the details div with
