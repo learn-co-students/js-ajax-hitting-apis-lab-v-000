@@ -25,7 +25,7 @@ function displayRepositories() {
               ` - <a href="#" ${username} data-repo="` +
               r.name +
               `" onclick="getCommits(this)">Get Commits</a>` +
-                ` - <a href="#" ${username} data-repo= ` +
+                ` - <a href="#" ${username} data-repo="` +
                 r.name +
               `" onclick="getBranches(this)">Get Branches</a> </li>` )
               }
@@ -71,10 +71,9 @@ function displayCommits() {
 function getBranches(el){
   let username = document.querySelector('input').value;
   let repository = el.dataset.repo;
-  let branch = el.dataset.branch;
-  let url = `https://api.github.com/repos/${username}/${repository}/branches/${branch}`
+  let url = `https://api.github.com/repos/${username}/${repository}` + `/branches`
   const req = new XMLHttpRequest();
-  req.addEventListener('load', displayCommits);
+  req.addEventListener('load', displayBranches);
   req.open('GET', url);
   req.send();
 }
@@ -90,7 +89,7 @@ function displayBranches(){
         '</li>'
     )
     .join('')}</ul>`;
-  document.getElementById('branches').innerHTML = branchesList;
+  document.getElementById('details').innerHTML = branchesList;
 }
 // Add a link to each repository that calls a getBranches function when clicked and,
 // when complete, calls a displayBranches function that fills the details div with
