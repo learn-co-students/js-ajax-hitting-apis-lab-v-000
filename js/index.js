@@ -27,8 +27,8 @@ function displayCommits () {
   let commitList = `<ul> ${commits.map(
     c =>
     '<li>' +
-    c.author.login +
-    ' - ' + c.commit.author.name +
+    (c.author != null ? c.author.login + ' - ' : ' ') +
+    c.commit.author.name +
     ' - ' + c.commit.message +
     '</li>'
   )
