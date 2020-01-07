@@ -22,7 +22,9 @@
     </style>
   </head>
 
+
   <body>
+
     <main id="main">
       <form onsubmit="getRepositories();return false;">
         <input type="text" id="username"><br>
@@ -32,8 +34,13 @@
     <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
+        <a href="#" onclick="getRepositories()">Get Repositories</a>
         <div id="repositories"></div>
       </div>
+        <form action="" method="get">
+          <label for="username">Username: </label>
+          <input type="text" name="username" id="repo-username">
+        </form>
       <div>
         <h3>Details</h3>
         <div id="details"></div>
