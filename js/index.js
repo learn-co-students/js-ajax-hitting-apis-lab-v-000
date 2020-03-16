@@ -19,7 +19,6 @@ function displayBranches() {
 
 function displayRepositories() {
   var repos = JSON.parse(this.responseText);
-  console.log(repos);
   const repoList = `<ul>${repos
     .map(
       r =>
@@ -34,7 +33,6 @@ function displayRepositories() {
 }
 
 function getRepositories() {
-  debugger
   var username = document.getElementById('username').value;
   const req = new XMLHttpRequest();
   req.addEventListener('load', displayRepositories);

@@ -30,16 +30,19 @@
       </form>
     </main>
     <div class="flexbox-container">
+      <!-- Create a form with a username field that calls a getRepositories function that loads the repositories div with a list of public repositories for that user. The displayed repositories should include the name and a link to the URL (HTML URL, not API URL). -->
+      <!-- Add a link to each repository that calls a getCommits function on click and, when the request is complete, calls a displayCommits function that fills the details div with a list of commits for that repository.  -->
+      <!-- Add a link to each repository that calls a getBranches function when clicked and, when complete, calls a displayBranches function that fills the details div with a list of names of each branch of the repository. Give the link data attributes of username and repository for use by the getBranches function. -->
       <div>
         <h3>Repositories</h3>
-        <div id="repositories">
-          <a href="#" onclick="getRepositories()">Get Repositories</a>
-        </div>
+        <div id="repositories"></div>
       </div>
+      <!-- Details shows commits or branches, depending on which repo link is clicked. -->
+      <!-- The display of commits should include the author's Github name, the author's full name, and the commit message. Give the link data attributes of username and repository to be used by the getCommits function. -->
+
       <div>
         <h3>Details</h3>
         <div id="details">
-          <a href="#" onclick="getCommits()">Get Commits</a>
         </div>
       </div>
     </div>
