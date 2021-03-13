@@ -6,6 +6,7 @@ const rootURL = "https://api.github.com"
 function getRepositories(){
     const name = document.getElementById("username").value
     const uri = rootURL + "/users/" + name + "/repos"
+    //  "https://api.github.com
     const xhr = new XMLHttpRequest()
     xhr.addEventListener("load", displayRepositories)
     xhr.open("GET", uri)
@@ -18,7 +19,7 @@ function displayRepositories(){
           console.log(this.responseText);
            const repos = JSON.parse(this.responseText)
            
-          const repoList = repos.map(r => `<li><a href=${r.html_url}>${r.name}</a></li>`).join('')
+          const repoList = repos.map(r => `<li><a href=${r.html_url}>${r.name}</a></li> `).join('')
         //    target what we need in those URL so it his clickable.
           document.getElementById('repositories').innerHTML = "<ul>" + repoList + "</ul>"
    }
@@ -29,6 +30,7 @@ function getCommits(el){
     
     const uri =
     rootURL + '/repos/' + el.dataset.username + '/' + repoName + '/commits';
+    //  list of commits for that repository.
     // the formate stays the same, but it targets different things.
     const xhr = new XMLHttpRequest();
     xhr.addEventListener("load", displayCommits);
